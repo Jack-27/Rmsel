@@ -9,16 +9,27 @@ require 'StateMachine'
 
 require 'states/BaseState'
 require 'states/TitleState'
+require 'states/PlayState'
 
 
 
 function love.load() 
+	local background = love.graphics.newImage('Sprites/Backgrounds/TempBackground.png')
 	love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
 
 	gStateMachine = StateMachine {
-        ['title'] = function() return TitleState() end
+        ['title'] = function() return TitleState() end,
+        ['play'] = function() return PlayState() end
     }
     gStateMachine:change('title')
+
+    Push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+        fullscreen = false,
+        resizable = true,
+        vsync = true,
+        canvas = false
+    })
+
         
 
 
@@ -34,5 +45,6 @@ function love.update(dt)
 	end
 end
 function love.draw()
+	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/TempBackground.png'), 0, 0)
 	gStateMachine:render()
 end

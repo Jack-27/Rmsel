@@ -17,7 +17,7 @@ end
 
 
 function TitleState:render()
-	love.graphics.clear(0, 0, .75, 1)
+	love.graphics.print('*Main Menu Noises*', 740, 360, 0, 1, 1)
 
 
 end
