@@ -2,6 +2,9 @@
 Push = require 'Push'
 Class = require 'Class'
 
+
+require 'ViolenceManAnims'
+require 'Util'
 require 'animation'
 require 'Settings'
 require 'Fighter'
