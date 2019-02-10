@@ -2,7 +2,7 @@
 Push = require 'Push'
 Class = require 'Class'
 
-
+require 'animation'
 require 'Settings'
 require 'Fighter'
 require 'StateMachine'
@@ -45,6 +45,7 @@ function love.update(dt)
 	end
 end
 function love.draw()
-	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/TempBackground.png'), 0, 0)
+	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/TempBackground.png'), 0, 0, 0, 2.96
+        , 2.96)
 	gStateMachine:render()
 end

@@ -11,13 +11,13 @@ function TitleState:exit() end
 
 function TitleState:update(dt)
 	if love.keyboard.isDown('return') then
-		gStateMachine:change()
+		gStateMachine:change('play')
 	end
 end
 
 
 function TitleState:render()
-	love.graphics.print('*Main Menu Noises*', 740, 360, 0, 1, 1)
+	love.graphics.print('*Main Menu Noises*', 500, 260, 0, 3, 3)
 
 
 end
