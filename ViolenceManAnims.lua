@@ -1,4 +1,4 @@
-require 'Animation'
+require 'animation'
 require 'Util'
 
 gSprites = {

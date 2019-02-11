@@ -5,7 +5,7 @@ Class = require 'Class'
 
 require 'ViolenceManAnims'
 require 'Util'
-require 'Animation'
+require 'animation'
 require 'Settings'
 require 'Fighter'
 require 'StateMachine'
