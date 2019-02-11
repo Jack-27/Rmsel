@@ -4,7 +4,6 @@ require 'ViolenceManAnims'
 function Fighter:init(type, x, y, dir)
 	self.x = x
 	self.y = y
-	self.sprite = love.graphics.newImage('sprites/ViolenceMan/violenceManNil.png', format)
 	self.dx = 0
 	self.width = 64
 	self.height = 64
@@ -26,16 +25,6 @@ function Fighter:update(dt)
 		self.x = math.max(0, self.x + self.dx * dt)
 	else
 		self.x = math.min(WINDOW_WIDTH - self.width, self.x + self.dx * dt)
-	end
-
-	if  self.currentAnimation ~= BlockTOAnim and self.blocking == true and self.currentAnimation ~= BlockAnim then
-		self.currentAnimation = BlockTOAnim
-	elseif BlockTOAnim:getCurrentFrame() == 5 and self.currentAnimation == BlockTOAnim then
-		self.currentAnimation = BlockAnim
-	elseif self.blocking == false and self.currentAnimation == BlockTOAnim and self.currentAnimation == BlockAnim then
-		self.currentAnimation = BlockFROMAnim
-	elseif BlockFROMAnim.done == 'done' and self.currentAnimation == BlockAnimFROM then
-		self.currentAnimation = IdleAnim
 	end
 
 
