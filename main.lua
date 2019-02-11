@@ -5,7 +5,7 @@ Class = require 'Class'
 
 require 'ViolenceManAnims'
 require 'Util'
-require 'animation'
+require 'Animation'
 require 'Settings'
 require 'Fighter'
 require 'StateMachine'
@@ -51,7 +51,6 @@ function love.update(dt)
 	end
 end
 function love.draw()
-	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/TempBackground.png'), 0, 0, 0, 2.96
-        , 2.96)
+	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/Background.png'), 0, 0)
 	gStateMachine:render()
 end

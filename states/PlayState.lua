@@ -1,7 +1,7 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init() end
-	Player1 = Fighter('Violence', 100, 241, -1)
+	Player1 = Fighter('Violence', 100, 290, -1)
 
 function PlayState:enter() end
 
@@ -21,6 +21,11 @@ function PlayState:update(dt)
     else
         Player1.dx = 0
         Player1.currentAnimation = IdleAnim
+    end
+    if love.keyboard.isDown('rshift') then
+        Player1.blocking = true
+    else
+        Player1.blocking = false
     end
 
     Player1:update(dt)
