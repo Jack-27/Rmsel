@@ -1,7 +1,7 @@
 Fighter = Class{}
 
 require 'ViolenceManAnims'
-function Fighter:init(type, x, y)
+function Fighter:init(type, x, y, dir)
 	self.x = x
 	self.y = y
 	self.sprite = love.graphics.newImage('sprites/ViolenceMan/violenceManNil.png', format)
@@ -9,7 +9,7 @@ function Fighter:init(type, x, y)
 	self.width = 64
 	self.height = 64
 	self.currentAnimation = IdleAnim
-	self.direction = 1
+	self.direction = dir
 	self.offset = 0
 
 	
@@ -17,7 +17,7 @@ end
 
 function Fighter:update(dt)
 	if self.direction == -1 then
-		self.offset = 64
+		self.offset = 256
 	else 
 		self.offset = 0
 	end

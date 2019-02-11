@@ -17,7 +17,9 @@ end
 
 
 function TitleState:render()
-	love.graphics.print('*Main Menu Noises*', 500, 260, 0, 3, 3)
+	love.graphics.setColor(0, 0, 0)
+	love.graphics.print('*Main Menu Noises*', 125, 260)
+	love.graphics.setColor(1, 1, 1)
 
 
 end

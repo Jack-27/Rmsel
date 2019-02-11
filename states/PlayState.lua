@@ -1,7 +1,7 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init() end
-	Player1 = Fighter('Violence', 100, 428)
+	Player1 = Fighter('Violence', 100, 241, -1)
 
 function PlayState:enter() end
 

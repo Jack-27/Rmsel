@@ -7,8 +7,8 @@ gSprites = {
 }
 
 gFrames = {
-	['idle'] = GenerateQuads(gSprites['idle'], 64, 64),
-	['walk'] = GenerateQuads(gSprites['walk'], 64, 64)
+	['idle'] = GenerateQuads(gSprites['idle'], 256, 256),
+	['walk'] = GenerateQuads(gSprites['walk'], 256, 256)
 }
 
 IdleAnim = Animation({
@@ -19,8 +19,8 @@ IdleAnim = Animation({
 
 
 WalkAnim = Animation({
-                frames = {1, 2, 3, 4, 5, 6, 7},
-                interval = 0.15,
+                frames = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                interval = 0.05,
                 texture = 'walk'
 
 
