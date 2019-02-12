@@ -29,8 +29,6 @@ function Fighter:update(dt)
 		self.x = math.min(WINDOW_WIDTH - self.width, self.x + self.dx * dt)
 	end
 
-	
-
 	self.currentAnimation:update(dt)
 end
 
