@@ -30,13 +30,20 @@ function Fighter:update(dt)
 	else
 		self.x = math.min(WINDOW_WIDTH - self.width, self.x + self.dx * dt)
 	end
-	if self.blocking == true then
-				local anim = self.currentAnimation
-		self.blockframe = anim:getCurrentFrame()
+	
 	if self.blocking == true and self.blockframe < 5 then
-		self.currentAnimation = BlockTOAnim 
+		self.currentAnimation = BlockTOAnim
+		local anim = self.currentAnimation
+		self.blockframe = anim.currentFrame
 
-	elseif self.blocking == true
+	elseif self.blocking == true and self.blockframe == 5 then
+		self.currentAnimation = BlockAnim
+	elseif self.blocking == false and self.blockframe > 1 then
+		self.currentAnimation = BlockFROMAnim
+		local anim = self.currentAnimation
+		self.blockframe = 5 - anim.currentFrame
+
+	end
 
 
 

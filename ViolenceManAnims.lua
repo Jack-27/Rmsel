@@ -21,7 +21,7 @@ IdleAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7},
                 interval = 0.15,
                 texture = 'idle',
-                looping = false
+                looping = true
             })
 
 
@@ -44,17 +44,16 @@ BlockAnim = Animation({
             })
 BlockTOAnim = Animation({
                 frames = {1, 2, 3, 4, 5},
-                interval = 0.10,
+                interval = 0.20,
                 texture = 'blockTO',
-                looping = false
+                looping = true
 
 
             })
 BlockFROMAnim = Animation({
                 frames = {1, 2, 3, 4, 5},
-                interval = 0.10,
+                interval = 0.20,
                 texture = 'blockFROM',
-                looping = false
-
+                looping = true
 
             })
