@@ -23,6 +23,15 @@ function PlayState:update(dt)
         Player1.currentAnimation = IdleAnim
     end
 
+
+    
+    if love.keyboard.isDown('rshift') then
+        Player1.blocking = true
+    else
+        Player1.blocking = false
+    end
+
+
     Player1:update(dt)
 
 

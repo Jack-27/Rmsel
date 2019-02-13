@@ -11,11 +11,14 @@ function Fighter:init(type, x, y, dir)
 	self.direction = dir
 	self.offset = 0
 	self.blocking = false
+	self.blockframe = 0
 
 	
 end
 
 function Fighter:update(dt)
+	local anim = self.currentAnimation
+
 	if self.direction == -1 then
 		self.offset = 256
 	else 
@@ -26,6 +29,25 @@ function Fighter:update(dt)
 	else
 		self.x = math.min(WINDOW_WIDTH - self.width, self.x + self.dx * dt)
 	end
+
+	
+	if self.blocking == true and self.blockframe < 5 then
+		self.currentAnimation = BlockTOAnim
+		local anim = self.currentAnimation
+		self.blockframe = anim.currentFrame
+	elseif self.blocking == true and self.blockframe == 5 then
+		self.currentAnimation = BlockAnim
+	elseif self.blocking == false and self.blockframe > 0 then
+		self.currentAnimation = BlockFROMAnim
+		local anim = self.currentAnimation
+		self.blockframe = (5 - anim.currentFrame)
+	else
+		self.blockframe = 0
+		BlockFROMAnim:refresh()
+		BlockTOAnim:refresh()
+	end
+
+
 
 	self.currentAnimation:update(dt)
 end
