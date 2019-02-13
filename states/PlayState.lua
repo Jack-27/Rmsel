@@ -1,3 +1,5 @@
+local GRAVITY = 50
+
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init() end
@@ -22,6 +24,16 @@ function PlayState:update(dt)
         Player1.dx = 0
         Player1.currentAnimation = IdleAnim
     end
+
+    if Player1.y < 290 then
+        Player1.dy = Player1.dy + GRAVITY * dt
+    end
+
+    if love.keyboard.isDown('up') then
+        Player1.dy = Player1.dy - 5
+    end
+
+    Player1.y = Player1.y + Player1.dy
 
     Player1:update(dt)
 

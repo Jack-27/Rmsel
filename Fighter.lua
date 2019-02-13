@@ -7,6 +7,7 @@ function Fighter:init(type, x, y, dir)
 	self.y = y
 	self.sprite = love.graphics.newImage('Sprites/ViolenceMan/violenceManNil.png', format)
 	self.dx = 0
+	self.dy = 0
 	self.width = 64
 	self.height = 64
 	self.currentAnimation = IdleAnim
