@@ -44,7 +44,7 @@ BlockAnim = Animation({
             })
 BlockTOAnim = Animation({
                 frames = {1, 2, 3, 4, 5},
-                interval = 0.20,
+                interval = 0.15,
                 texture = 'blockTO',
                 looping = true
 
@@ -52,7 +52,7 @@ BlockTOAnim = Animation({
             })
 BlockFROMAnim = Animation({
                 frames = {1, 2, 3, 4, 5},
-                interval = 0.20,
+                interval = 0.15,
                 texture = 'blockFROM',
                 looping = true
 
