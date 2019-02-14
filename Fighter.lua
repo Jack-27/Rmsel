@@ -4,10 +4,10 @@ require 'ViolenceManAnims'
 function Fighter:init(type, x, y, dir)
 	self.x = x
 	self.y = y
-	self.sprite = love.graphics.newImage('sprites/ViolenceMan/violenceManNil.png', format)
+	self.sprite = love.graphics.newImage('Sprites/ViolenceMan/violenceManNil.png', format)
 	self.dx = 0
-	self.width = 64
-	self.height = 64
+	self.width = 256
+	self.height = 256
 	self.currentAnimation = IdleAnim
 	self.direction = dir
 	self.offset = 0

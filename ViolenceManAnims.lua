@@ -21,7 +21,7 @@ IdleAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7},
                 interval = 0.15,
                 texture = 'idle',
-                looping = false
+                looping = true
             })
 
 
