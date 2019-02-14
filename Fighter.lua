@@ -28,7 +28,7 @@ function Fighter:update(dt)
 		self.x = math.min(WINDOW_WIDTH - self.width, self.x + self.dx * dt)
 	end
 
-	if  self.currentAnimation = BlockTOAnim and self.blocking == true and self.currentAnimation ~= BlockAnim then
+	if  self.currentAnimation ~= BlockTOAnim and self.blocking == true and self.currentAnimation ~= BlockAnim then
 		self.currentAnimation = BlockTOAnim
 	elseif BlockTOAnim:getCurrentFrame() == 5 and self.currentAnimation == BlockTOAnim then
 		self.currentAnimation = BlockAnim

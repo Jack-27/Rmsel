@@ -44,6 +44,14 @@ function love.load()
 
 end
 
+function love.keypressed(key)
+    if key == 'escape' then
+        love.event.quit()
+    end
+
+    love.keyboard.keysPressed[key] = true
+end
+
 function love.update(dt)
 
 	gStateMachine:update(dt)
