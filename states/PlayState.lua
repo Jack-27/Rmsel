@@ -27,21 +27,21 @@ function PlayState:update(dt)
 
     if Player1.y < 290 then
         Player1.dy = Player1.dy + GRAVITY * dt
+    else
+        Player1.dy = 0
+        Player1.y = 290
     end
 
     if love.keyboard.isDown('up') then
         Player1.dy = Player1.dy - 5
+    else
+        Player1.dy = Player1.dy
     end
 
     Player1.y = Player1.y + Player1.dy
 
     Player1:update(dt)
-
-
-
-
 end
-
 
 function PlayState:render() 
 	Player1:render()

@@ -33,9 +33,6 @@ function Fighter:update(dt)
 	self.currentAnimation:update(dt)
 end
 
-
-
-
 function Fighter:render()
 	local anim = self.currentAnimation
 	love.graphics.draw(gSprites[anim.texture], gFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.offset)
