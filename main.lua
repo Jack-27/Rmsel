@@ -3,11 +3,11 @@ Push = require 'Push'
 Class = require 'Class'
 
 
-require 'ViolenceManAnims'
+
 require 'Util'
 require 'Animation'
 require 'Settings'
-require 'Fighter'
+require 'ViolenceMan'
 require 'StateMachine'
 
 require 'states/BaseState'
@@ -53,4 +53,5 @@ end
 function love.draw()
 	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/Background.png'), 0, 0)
 	gStateMachine:render()
+    collectgarbage( 'collect' )
 end
