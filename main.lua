@@ -9,6 +9,7 @@ require 'Animation'
 require 'Settings'
 require 'StateMachine'
 require 'Hurtbox'
+require 'UI'
 --characters
 require 'ViolenceMan'
 require 'GeorgeLopez'

@@ -1,8 +1,9 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init() end
-	Player1 = GeorgeLopez('Violence', 100, 290, -1)
-    Player2 = ViolenceMan('ah', 500, 290, 1)
+	Player1 = GeorgeLopez(100, 290, -1)
+    Player2 = ViolenceMan(500, 290, 1)
+    UI = UI()
 
 
 function PlayState:enter() end
@@ -12,6 +13,7 @@ function PlayState:exit() end
 
 
 function PlayState:update(dt) 
+    UI:update(dt)
    --player one controls
    --uses detect input boolean in order to lock/unlock play using characters
     if Player1.detectInput == true then
@@ -104,6 +106,7 @@ function PlayState:render()
     --drawing players
 	Player1:render()
     Player2:render()
+    UI:render()
 
 
 end

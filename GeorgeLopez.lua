@@ -61,7 +61,6 @@ function GeorgeLopez:update(dt)
 		self.blockframe = anim.currentFrame
 	elseif self.blocking == true and self.blockframe == 5 then
 		self.currentAnimation = GLBlockAnim
-		GLHurtbox:shift(self.width +32)
 	elseif self.blocking == false and self.blockframe > 0 then
 		self.currentAnimation = GLBlockFROMAnim
 		local anim = self.currentAnimation
@@ -73,7 +72,6 @@ function GeorgeLopez:update(dt)
 			GLBlockFROMAnim:refresh()
 			GLBlockTOAnim:refresh()
 			self.animCancel = true
-			self.currentAnimation = GLIdleAnim
 		end
 	end
 	--crouching code
@@ -94,7 +92,6 @@ function GeorgeLopez:update(dt)
 			GLCrouchFROMAnim:refresh()
 			GLCrouchTOAnim:refresh()
 			self.animCancel = true
-			self.currentAnimation = GLIdleAnim
 		end
 	end
 	self.currentAnimation:update(dt)
@@ -121,7 +118,7 @@ end
 
 --rendering 
 function GeorgeLopez:render()
-	--[[section to enable showing hit boxes
+	--section to enable showing hit boxes
 	love.graphics.setColor(0, .05, .25)
 	GLHurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
