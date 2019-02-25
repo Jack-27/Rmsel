@@ -1,4 +1,3 @@
-local GRAVITY = 50
 
 PlayState = Class{__includes = BaseState}
 
@@ -27,18 +26,17 @@ function PlayState:update(dt)
 
     if Player1.y < 290 then
         Player1.dy = Player1.dy + GRAVITY * dt
+
     end
 
-    if love.keyboard.isDown('up') then
-        Player1.dy = Player1.dy - 5
+    if love.keyboard.isDown('up') and Jumping > .5 then
+        Player1.dy = -20
+        Jumping = 0
     end
 
     Player1.y = Player1.y + Player1.dy
 
     Player1:update(dt)
-
-
-
 
 end
 

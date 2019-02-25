@@ -29,12 +29,16 @@ function Fighter:update(dt)
 	else
 		self.x = math.min(WINDOW_WIDTH - self.width, self.x + self.dx * dt)
 	end
+	if self.y < 290 then
+		self.dy = self.dy + GRAVITY * dt
+	else
+		self.dy=0
+		self.y = 290
+		Jumping = 1
+	end
 
 	self.currentAnimation:update(dt)
 end
-
-
-
 
 function Fighter:render()
 	local anim = self.currentAnimation
