@@ -24,22 +24,17 @@ function PlayState:update(dt)
         Player1.currentAnimation = IdleAnim
     end
 
-    if Player1.y < 290 then
-        Player1.dy = Player1.dy + GRAVITY * dt
-
-    end
-
     if love.keyboard.isDown('up') and Jumping > .5 then
         Player1.dy = -20
         Jumping = 0
+    else
+        Player1.dy = 0
+        Player1.y = 290
     end
 
     Player1.y = Player1.y + Player1.dy
 
     Player1:update(dt)
-
-end
-
 
 function PlayState:render() 
 	Player1:render()
