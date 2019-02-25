@@ -7,8 +7,11 @@ Class = require 'Class'
 require 'Util'
 require 'Animation'
 require 'Settings'
-require 'ViolenceMan'
 require 'StateMachine'
+require 'Hurtbox'
+
+require 'ViolenceMan'
+require 'GeorgeLopez'
 
 require 'states/BaseState'
 require 'states/TitleState'

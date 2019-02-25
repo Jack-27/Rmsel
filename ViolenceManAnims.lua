@@ -1,7 +1,7 @@
 require 'Animation'
 require 'Util'
 
-gSprites = {
+VMgSprites = {
 	['idle'] = love.graphics.newImage('Sprites/ViolenceMan/violenceManIdle.png'),
 	['walk'] = love.graphics.newImage('Sprites/ViolenceMan/violenceManWalk.png'),
     ['block'] = love.graphics.newImage('Sprites/ViolenceMan/violenceManBlock.png'),
@@ -16,22 +16,22 @@ gSprites = {
     ['skick'] = love.graphics.newImage('Sprites/ViolenceMan/violenceManSpecialKick.png')
 }
 
-gFrames = {
-	['idle'] = GenerateQuads(gSprites['idle'], 256, 256),
-	['walk'] = GenerateQuads(gSprites['walk'], 256, 256),
-    ['block'] = GenerateQuads(gSprites['block'], 256, 256),
-    ['blockTO'] = GenerateQuads(gSprites['blockTO'], 256, 256),
-    ['blockFROM'] = GenerateQuads(gSprites['blockFROM'], 256, 256),
-    ['crouch'] = GenerateQuads(gSprites['crouch'], 256, 256),
-    ['crouchTO'] = GenerateQuads(gSprites['crouchTO'], 256, 256),
-    ['crouchFROM'] = GenerateQuads(gSprites['crouchFROM'], 256, 256),
-    ['punch'] = GenerateQuads(gSprites['punch'], 512, 512),
-    ['spunch'] = GenerateQuads(gSprites['spunch'], 256, 256),
-    ['kick'] = GenerateQuads(gSprites['kick'], 256, 256),
-    ['skick'] = GenerateQuads(gSprites['skick'], 256, 256)
+VMgFrames = {
+	['idle'] = GenerateQuads(VMgSprites['idle'], 256, 256),
+	['walk'] = GenerateQuads(VMgSprites['walk'], 256, 256),
+    ['block'] = GenerateQuads(VMgSprites['block'], 256, 256),
+    ['blockTO'] = GenerateQuads(VMgSprites['blockTO'], 256, 256),
+    ['blockFROM'] = GenerateQuads(VMgSprites['blockFROM'], 256, 256),
+    ['crouch'] = GenerateQuads(VMgSprites['crouch'], 256, 256),
+    ['crouchTO'] = GenerateQuads(VMgSprites['crouchTO'], 256, 256),
+    ['crouchFROM'] = GenerateQuads(VMgSprites['crouchFROM'], 256, 256),
+    ['punch'] = GenerateQuads(VMgSprites['punch'], 512, 512),
+    ['spunch'] = GenerateQuads(VMgSprites['spunch'], 256, 256),
+    ['kick'] = GenerateQuads(VMgSprites['kick'], 256, 256),
+    ['skick'] = GenerateQuads(VMgSprites['skick'], 256, 256)
 }
 
-IdleAnim = Animation({
+VMIdleAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7},
                 interval = 0.15,
                 texture = 'idle',
@@ -39,7 +39,7 @@ IdleAnim = Animation({
             })
 
 
-WalkAnim = Animation({
+VMWalkAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                 interval = 0.05,
                 texture = 'walk',
@@ -48,7 +48,7 @@ WalkAnim = Animation({
 
             })
 
-BlockAnim = Animation({
+VMBlockAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7},
                 interval = 0.15,
                 texture = 'block',
@@ -56,7 +56,7 @@ BlockAnim = Animation({
 
 
             })
-BlockTOAnim = Animation({
+VMBlockTOAnim = Animation({
                 frames = {1, 2, 3, 4, 5},
                 interval = 0.15,
                 texture = 'blockTO',
@@ -64,14 +64,14 @@ BlockTOAnim = Animation({
 
 
             })
-BlockFROMAnim = Animation({
+VMBlockFROMAnim = Animation({
                 frames = {1, 2, 3, 4, 5},
                 interval = 0.15,
                 texture = 'blockFROM',
                 looping = true
 
             })
-CrouchAnim = Animation({
+VMCrouchAnim = Animation({
                 frames = {1, 2, 3, 4},
                 interval = 0.15,
                 texture = 'crouch',
@@ -79,7 +79,7 @@ CrouchAnim = Animation({
 
 
             })
-CrouchTOAnim = Animation({
+VMCrouchTOAnim = Animation({
                 frames = {1, 2, 3, 4},
                 interval = 0.15,
                 texture = 'crouchTO',
@@ -87,35 +87,35 @@ CrouchTOAnim = Animation({
 
 
             })
-CrouchFROMAnim = Animation({
+VMCrouchFROMAnim = Animation({
                 frames = {1, 2, 3, 4},
                 interval = 0.15,
                 texture = 'crouchFROM',
                 looping = true
 
             })
-PunchAnim = Animation({
+VMPunchAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
                 interval = 0.05,
                 texture = 'punch',
                 looping = true
 
             })
-SPunchAnim = Animation({
+VMSPunchAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7},
                 interval = 0.15,
                 texture = 'spunch',
                 looping = true
 
             })
-KickAnim = Animation({
+VMKickAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
                 interval = 0.15,
                 texture = 'kick',
                 looping = true
 
             })
-SKickAnim = Animation({
+VMSKickAnim = Animation({
                 frames = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22},
                 interval = 0.05,
                 texture = 'skick',
