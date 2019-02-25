@@ -2,6 +2,7 @@ GeorgeLopez = Class{}
 
 require 'GeorgeLopezAnims'
 function GeorgeLopez:init(type, x, y, dir)
+	--inits all the vars tried to make them self explainatory
 	self.x = x
 	self.y = y
 	self.dx = 0
@@ -32,13 +33,13 @@ function GeorgeLopez:init(type, x, y, dir)
 end
 
 function GeorgeLopez:update(dt)
-	local anim = self.currentAnimation
-
+	--fixes the jumpin around in sprites when turning around
 	if self.direction == -1 then
 		self.offset = 256
 	else
 		self.offset = 0
 	end
+	--allows movement
 	if self.dx < 0 and self.canMove == true then
 		self.currentAnimation = GLWalkAnim
 		self.x = math.max(0, self.x + self.dx * dt)
@@ -51,8 +52,9 @@ function GeorgeLopez:update(dt)
 	    	GLWalkAnim:refresh()
 	    end
 	end
+	--hitbox update
 	GLHurtbox:move(self.x + 32, self.y + 50)
-	
+	--blocking code
 	if self.blocking == true and self.blockframe < 5 then
 		self.currentAnimation = GLBlockTOAnim
 		local anim = self.currentAnimation
@@ -74,6 +76,7 @@ function GeorgeLopez:update(dt)
 			self.currentAnimation = GLIdleAnim
 		end
 	end
+	--crouching code
 	if self.crouching == true and self.crouchframe < 4 then
 		self.currentAnimation = GLCrouchTOAnim
 		local anim = self.currentAnimation
@@ -95,6 +98,7 @@ function GeorgeLopez:update(dt)
 		end
 	end
 	self.currentAnimation:update(dt)
+	--attack frame update code
 	if self.attacking == true and self.dx == 0 then
 		local anim = self.currentAnimation
 		self.attackFrame = anim.currentFrame
@@ -115,11 +119,12 @@ end
 
 
 
-
+--rendering 
 function GeorgeLopez:render()
+	--[[section to enable showing hit boxes
 	love.graphics.setColor(0, .05, .25)
 	GLHurtbox:render()
-	love.graphics.setColor(1, 1, 1)
+	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
 	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
 end

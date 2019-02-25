@@ -12,32 +12,37 @@ function PlayState:exit() end
 
 
 function PlayState:update(dt) 
-    --need to move the anim changes somewhere esle currently temp
+   --player one controls
+   --uses detect input boolean in order to lock/unlock play using characters
     if Player1.detectInput == true then
+        --movement
        if love.keyboard.isDown('left') and Player1.canMove == true then
             Player1.dx = -PLAYER_SPEED
             Player1.direction = 1
-            --Player1.currentAnimation = GLWalkAnim
+            
         elseif love.keyboard.isDown('right') and Player1.canMove == true then
             Player1.dx = PLAYER_SPEED
-            --Player1.currentAnimation = GLWalkAnim
+            
             Player1.direction = -1
         else
             Player1.dx = 0
-            --Player1.currentAnimation = GLIdleAnim
+            
         end
+        --crouching
         if love.keyboard.isDown('down') then
             Player1.crouching = true
             Player1.canMove = false
         else
             Player1.crouching = false
         end
+        --blocking
         if love.keyboard.isDown('rshift') then
             Player1.blocking = true
             Player1.canMove = false
         else
             Player1.blocking = false
         end
+        --attacks allowing for the / to change into specials 
         if love.keyboard.isDown(',') and love.keyboard.isDown('/') then
             Player1:spunch()
         elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') then
@@ -51,6 +56,7 @@ function PlayState:update(dt)
     else
         Player1:punch()
     end
+    --Player 2 controls, literally the same
     if Player2.detectInput == true then
        if love.keyboard.isDown('a') and Player2.canMove == true then
             Player2.dx = -PLAYER_SPEED
@@ -83,8 +89,8 @@ function PlayState:update(dt)
         elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') then
             Player2:kick()
         end
-    end--]]
-
+    end
+    --updating players
     Player1:update(dt)
     Player2:update(dt)
 
@@ -95,6 +101,7 @@ end
 
 
 function PlayState:render() 
+    --drawing players
 	Player1:render()
     Player2:render()
 
