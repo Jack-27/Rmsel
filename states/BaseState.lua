@@ -1,5 +1,5 @@
 BaseState = Class{}
-
+--empty class for example DONT DELETE
 function BaseState:init() end
 function BaseState:enter() end
 function BaseState:exit() end
