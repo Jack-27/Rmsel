@@ -1,7 +1,7 @@
 ViolenceMan = Class{}
 
 require 'ViolenceManAnims'
-function ViolenceMan:init(type, x, y, dir)
+function ViolenceMan:init(x, y, dir)
 	self.x = x
 	self.y = y
 	self.dx = 0

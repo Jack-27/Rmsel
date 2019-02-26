@@ -33,7 +33,7 @@ function UI:render()
 	love.graphics.print(90 - self.time, WINDOW_WIDTH / 2, 20)
 	love.graphics.rectangle('fill', 16, 24, self.P1HP * 5 - 2, 42)
 	love.graphics.rectangle('fill', WINDOW_WIDTH - 516, 24, self.P2HP * 5 - 2, 42)
-	love.graphics.setColor(0, 0, 0)
+	love.graphics.setColor(1, 1, 1)
 
 
 end

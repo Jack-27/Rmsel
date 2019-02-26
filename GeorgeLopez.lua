@@ -1,7 +1,7 @@
 GeorgeLopez = Class{}
 
 require 'GeorgeLopezAnims'
-function GeorgeLopez:init(type, x, y, dir)
+function GeorgeLopez:init(x, y, dir)
 	--inits all the vars tried to make them self explainatory
 	self.x = x
 	self.y = y
