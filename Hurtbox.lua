@@ -37,13 +37,13 @@ end
 
 --for testing btw
 function Hurtbox:render()
-	love.graphics.rectangle('fill', self.x _+ self.widthMod, self.y + self.heightMod, self.width, self.height)
+	love.graphics.rectangle('fill', self.x + self.widthMod, self.y + self.heightMod, self.width, self.height)
 end
 
 function Hurtbox:collide(hurtbox2)
 	if self.x + self.width + self.widthMod == hurtbox2.x then
 		return true
-	elseif self.x == hurtbox2.x + hurtbox2.width = hurtbox2.widthMod then
+	elseif self.x == hurtbox2.x + hurtbox2.width + hurtbox2.widthMod then
 		return true
 	else
 		return false

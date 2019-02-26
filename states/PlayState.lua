@@ -55,6 +55,11 @@ function PlayState:update(dt)
         elseif love.keyboard.isDown('.') and not love.keyboard.isDown('/') then
             Player1:kick()
         end
+        --jumping
+        if love.keyboard.isDown('up') and Player1.jumping == true then
+            Player1.dy = - Player1.jumpHeight
+        end
+        Player1.y = Player1.y + Player1.dy
     else
         Player1:punch()
     end
@@ -91,6 +96,10 @@ function PlayState:update(dt)
         elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') then
             Player2:kick()
         end
+         if love.keyboard.isDown('w') and Player2.jumping == true then
+            Player2.dy = - Player2.jumpHeight
+        end
+        Player2.y = Player2.y + Player2.dy
     end
     --updating players
     Player1:update(dt)
