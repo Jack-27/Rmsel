@@ -23,7 +23,7 @@ function GeorgeLopez:init(x, y, dir)
 	self.attackFrame = 0
 	self.detectInput = true
 	self.jumping = true
-	self.jumpHeight = 16
+	self.jumpHeight = 20
 	self.Hurtboxx = self.x 
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64
