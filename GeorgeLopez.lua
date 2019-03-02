@@ -6,6 +6,7 @@ function GeorgeLopez:init(x, y, dir)
 	self.x = x
 	self.y = y
 	self.dx = 0
+	self.dy = 0
 	self.width = 256
 	self.height = 256
 	self.currentAnimation = GLIdleAnim
@@ -21,6 +22,8 @@ function GeorgeLopez:init(x, y, dir)
 	self.attacking = false
 	self.attackFrame = 0
 	self.detectInput = true
+	self.jumping = true
+	self.jumpHeight = 20
 	self.Hurtboxx = self.x 
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64
@@ -113,7 +116,15 @@ function GeorgeLopez:update(dt)
 	else
 		self.attackFrame = 0
 	end
-	
+	--jumping code
+	if self.y < 290 then
+		self.dy = self.dy + dt * GRAVITY
+		self.jumping = false
+	else
+		self.y = 290
+		self.dy = 0
+		self.jumping = true
+	end
 end
 
 
