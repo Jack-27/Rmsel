@@ -26,6 +26,7 @@ function GeorgeLopez:init(x, y, dir)
 	self.HurtboxWidth = self.width - 64
 	self.HurtboxHeight = self.height - 50
 	GLHurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
+	GLPunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
 
 
 
@@ -54,6 +55,7 @@ function GeorgeLopez:update(dt)
 	end
 	--hitbox update
 	GLHurtbox:move(self.x + 32, self.y + 50)
+	GLPunchHB:move(self.x, self.y + 120)
 	--blocking code
 	if self.blocking == true and self.blockframe < 5 then
 		self.currentAnimation = GLBlockTOAnim
@@ -121,6 +123,8 @@ function GeorgeLopez:render()
 	--section to enable showing hit boxes
 	love.graphics.setColor(0, .05, .25)
 	GLHurtbox:render()
+	love.graphics.setColor(1, 0, 0)
+	GLPunchHB:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
 	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
