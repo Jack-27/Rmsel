@@ -20,11 +20,8 @@ require 'states/PlayState'
 
 
 function love.load() 
-<<<<<<< HEAD
     love.window.setTitle('Fighter')
-=======
     --adds fonts and background
->>>>>>> 2f43835cf0a2562699d0442622cb4c7581d7f6cf
     BigFont = love.graphics.newFont('PrStart.ttf', 64)
     love.graphics.setFont(BigFont)
     love.graphics.setDefaultFilter('nearest', 'nearest')
