@@ -115,11 +115,11 @@ function GeorgeLopez:update(dt)
 		self.attackFrame = 0
 	end
 	--jumping code
-	if self.y < 290 then
+	if self.y < GROUND_HEIGHT then
 		self.dy = self.dy + dt * GRAVITY
 		self.jumping = false
 	else
-		self.y = 290
+		self.y = GROUND_HEIGHT
 		self.dy = 0
 		self.jumping = true
 	end

@@ -11,7 +11,7 @@ function TitleState:exit() end
 
 function TitleState:update(dt)
 	if love.keyboard.isDown('return') then
-		gStateMachine:change('play')
+		gStateMachine:change('select')
 	end
 end
 

@@ -17,6 +17,7 @@ require 'GeorgeLopez'
 require 'states/BaseState'
 require 'states/TitleState'
 require 'states/PlayState'
+require 'states/SelectState'
 
 
 
@@ -30,7 +31,8 @@ function love.load()
     --adds all the states to the state 
 	gStateMachine = StateMachine {
         ['title'] = function() return TitleState() end,
-        ['play'] = function() return PlayState() end
+        ['play'] = function() return PlayState() end,
+        ['select'] = function() return SelectState() end
     }
     gStateMachine:change('title')
     --honestly this is useless a relic of olden days
