@@ -13,5 +13,6 @@ function SelectState:update(dt)
 end
 
 function SelectState:render()
-	love.graphics.setColor(0, 0, 0, 0)
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.print('press space to continue', 125, 550)
 end
