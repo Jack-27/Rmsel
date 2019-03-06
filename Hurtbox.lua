@@ -5,7 +5,7 @@ function Hurtbox:init(x, y, width, height)
 	self.x = x
 	self.y = y
 	self.ogwidth = width
-	self.odheight = height
+	self.ogheight = height
 	self.width = width
 	self.height = height
 	self.widthMod = 0

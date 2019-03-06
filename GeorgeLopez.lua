@@ -30,6 +30,8 @@ function GeorgeLopez:init(x, y, dir)
 	self.HurtboxHeight = self.height - 50
 	GLHurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
 	GLPunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
+	GLKickHB = Hurtbox(self.x, self.y + 215, 32, 25)
+	GLSKickHB = Hurtbox(self.x, self.y + 32, 256, 64)
 
 
 
@@ -60,8 +62,12 @@ function GeorgeLopez:update(dt)
 	GLHurtbox:move(self.x + 32, self.y + 50)
 	if self.direction == 1 then 
 		GLPunchHB:move(self.x, self.y + 120)
+		GLKickHB:move(self.x, self.y + 215)
+		GLSKickHB:move(self.x, self.y + 32)
 	else
 		GLPunchHB:move(self.x + self.HurtboxWidth + 32, self.y + 120)
+		GLKickHB:move(self.x + self.HurtboxWidth + 32, self.y + 215)
+		GLSKickHB:move(self.x, self.y + 32)
 	end
 	--blocking code
 	if self.blocking == true and self.blockframe < 5 then
@@ -90,9 +96,11 @@ function GeorgeLopez:update(dt)
 		self.crouchframe = anim.currentFrame
 	elseif self.crouching == true and self.crouchframe == 4 then
 		self.currentAnimation = GLCrouchAnim
+		GLHurtbox:shifth(170, 36)
 	elseif self.crouching == false and self.crouchframe > 0 then
 		self.currentAnimation = GLCrouchFROMAnim
 		local anim = self.currentAnimation
+		GLHurtbox:reset()
 		self.crouchframe = (4 - anim.currentFrame)
 	else
 		if self.attacking == false and self.dx == 0 then
@@ -136,10 +144,13 @@ end
 --rendering 
 function GeorgeLopez:render()
 	--section to enable showing hit boxes
+	--[[love.graphics.setColor(1, 0, 0)
+	GLPunchHB:render()
+	--GLSPunchHB:render()
+	GLKickHB:render()
+	GLSKickHB:render()--]]
 	love.graphics.setColor(0, .05, .25)
 	GLHurtbox:render()
-	love.graphics.setColor(1, 0, 0)
-	GLPunchHB:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
 	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
@@ -168,7 +179,6 @@ function GeorgeLopez:kick()
 		self.detectInput = false
 		self.currentAnimation = GLKickAnim
 		self.attacking = true
-		--Cannonball =
 
 	elseif self.attackFrame > 15 then
 		self.canMove = false
