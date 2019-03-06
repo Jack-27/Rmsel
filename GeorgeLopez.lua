@@ -58,7 +58,11 @@ function GeorgeLopez:update(dt)
 	end
 	--hitbox update
 	GLHurtbox:move(self.x + 32, self.y + 50)
-	GLPunchHB:move(self.x, self.y + 120)
+	if self.direction == 1 then 
+		GLPunchHB:move(self.x, self.y + 120)
+	else
+		GLPunchHB:move(self.x + self.HurtboxWidth + 32, self.y + 120)
+	end
 	--blocking code
 	if self.blocking == true and self.blockframe < 5 then
 		self.currentAnimation = GLBlockTOAnim
