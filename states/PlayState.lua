@@ -1,8 +1,9 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init() end
-	Player1 = GeorgeLopez('Violence', 100, 290, -1)
-    Player2 = ViolenceMan('ah', 500, 290, 1)
+	Player1 = GeorgeLopez(100, 290, 1)
+    Player2 = ViolenceMan(500, 290, 1)
+   -- UI = UI()
 
 
 function PlayState:enter() end
@@ -12,6 +13,7 @@ function PlayState:exit() end
 
 
 function PlayState:update(dt) 
+   -- UI:update(dt)
    --player one controls
    --uses detect input boolean in order to lock/unlock play using characters
     if Player1.detectInput == true then
@@ -29,30 +31,35 @@ function PlayState:update(dt)
             
         end
         --crouching
-        if love.keyboard.isDown('down') then
+        if love.keyboard.isDown('down') and Player1.jumping == true then
             Player1.crouching = true
             Player1.canMove = false
         else
             Player1.crouching = false
         end
         --blocking
-        if love.keyboard.isDown('rshift') then
+        if love.keyboard.isDown('rshift') and Player1.jumping == true then
             Player1.blocking = true
             Player1.canMove = false
         else
             Player1.blocking = false
         end
         --attacks allowing for the / to change into specials 
-        if love.keyboard.isDown(',') and love.keyboard.isDown('/') then
+        if love.keyboard.isDown(',') and love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:spunch()
-        elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') then
+        elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:punch()
         end
-        if love.keyboard.isDown('.') and love.keyboard.isDown('/') then
+        if love.keyboard.isDown('.') and love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:skick()
-        elseif love.keyboard.isDown('.') and not love.keyboard.isDown('/') then
+        elseif love.keyboard.isDown('.') and not love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:kick()
         end
+        --jumping
+        if love.keyboard.isDown('up') and Player1.jumping == true then
+            Player1.dy = - Player1.jumpHeight
+        end
+        Player1.y = Player1.y + Player1.dy
     else
         Player1:punch()
     end
@@ -67,28 +74,32 @@ function PlayState:update(dt)
         else
             Player2.dx = 0
         end
-        if love.keyboard.isDown('s') then
+        if love.keyboard.isDown('s') and Player2.jumping == true then
             Player2.crouching = true
             Player2.canMove = false
         else
             Player2.crouching = false
         end
-        if love.keyboard.isDown('lshift') then
+        if love.keyboard.isDown('lshift') and Player2.jumping == true then
             Player2.blocking = true
             Player2.canMove = false
         else
             Player2.blocking = false
         end
-        if love.keyboard.isDown('q') and love.keyboard.isDown('tab') then
+        if love.keyboard.isDown('q') and love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:spunch()
-        elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') then
+        elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:punch()
         end
-        if love.keyboard.isDown('e') and love.keyboard.isDown('tab') then
+        if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:skick()
-        elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') then
+        elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:kick()
         end
+         if love.keyboard.isDown('w') and Player2.jumping == true then
+            Player2.dy = - Player2.jumpHeight
+        end
+        Player2.y = Player2.y + Player2.dy
     end
     --updating players
     Player1:update(dt)
@@ -102,8 +113,10 @@ end
 
 function PlayState:render() 
     --drawing players
-	Player1:render()
+	--UI:render()
+    Player1:render()
     Player2:render()
+    
 
 
 end

@@ -1,3 +1,6 @@
+
+
+
 --Alright
 Push = require 'Push'
 Class = require 'Class'
@@ -9,6 +12,7 @@ require 'Animation'
 require 'Settings'
 require 'StateMachine'
 require 'Hurtbox'
+require 'UI'
 --characters
 require 'ViolenceMan'
 require 'GeorgeLopez'
@@ -33,7 +37,7 @@ function love.load()
         ['play'] = function() return PlayState() end
     }
     gStateMachine:change('title')
-    --honestly this is useless a relic of old days
+    --honestly this is useless a relic of olden days
     Push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = true,

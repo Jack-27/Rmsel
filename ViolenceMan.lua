@@ -1,10 +1,11 @@
 ViolenceMan = Class{}
 
 require 'ViolenceManAnims'
-function ViolenceMan:init(type, x, y, dir)
+function ViolenceMan:init(x, y, dir)
 	self.x = x
 	self.y = y
 	self.dx = 0
+	self.dy = 0
 	self.width = 64
 	self.height = 64
 	self.currentAnimation = VMIdleAnim
@@ -20,6 +21,8 @@ function ViolenceMan:init(type, x, y, dir)
 	self.attacking = false
 	self.attackFrame = 0
 	self.detectInput = true
+	self.jumping = true
+	self.jumpHeight = 18
 
 	
 end
@@ -61,8 +64,7 @@ function ViolenceMan:update(dt)
 			self.canMove = true
 			VMBlockFROMAnim:refresh()
 			VMBlockTOAnim:refresh()
-			self.animCancel = true
-			self.currentAnimation = VMIdleAnim
+			self.animCancel = truem
 		end
 	end
 	if self.crouching == true and self.crouchframe < 4 then
@@ -81,7 +83,6 @@ function ViolenceMan:update(dt)
 			VMCrouchFROMAnim:refresh()
 			VMCrouchTOAnim:refresh()
 			self.animCancel = true
-			self.currentAnimation = VMIdleAnim
 		end
 	end
 
@@ -99,6 +100,14 @@ function ViolenceMan:update(dt)
 		end
 	else
 		self.attackFrame = 0
+	end
+	if self.y < 290 then
+		self.dy = self.dy + dt * GRAVITY
+		self.jumping = false
+	else
+		self.y = 290
+		self.dy = 0
+		self.jumping = true
 	end
 	self.currentAnimation:update(dt)
 end

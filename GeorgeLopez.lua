@@ -1,11 +1,12 @@
 GeorgeLopez = Class{}
 
 require 'GeorgeLopezAnims'
-function GeorgeLopez:init(type, x, y, dir)
+function GeorgeLopez:init(x, y, dir)
 	--inits all the vars tried to make them self explainatory
 	self.x = x
 	self.y = y
 	self.dx = 0
+	self.dy = 0
 	self.width = 256
 	self.height = 256
 	self.currentAnimation = GLIdleAnim
@@ -21,11 +22,14 @@ function GeorgeLopez:init(type, x, y, dir)
 	self.attacking = false
 	self.attackFrame = 0
 	self.detectInput = true
+	self.jumping = true
+	self.jumpHeight = 20
 	self.Hurtboxx = self.x 
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64
 	self.HurtboxHeight = self.height - 50
 	GLHurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
+	GLPunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
 
 
 
@@ -54,6 +58,11 @@ function GeorgeLopez:update(dt)
 	end
 	--hitbox update
 	GLHurtbox:move(self.x + 32, self.y + 50)
+	if self.direction == 1 then 
+		GLPunchHB:move(self.x, self.y + 120)
+	else
+		GLPunchHB:move(self.x + self.HurtboxWidth + 32, self.y + 120)
+	end
 	--blocking code
 	if self.blocking == true and self.blockframe < 5 then
 		self.currentAnimation = GLBlockTOAnim
@@ -61,7 +70,6 @@ function GeorgeLopez:update(dt)
 		self.blockframe = anim.currentFrame
 	elseif self.blocking == true and self.blockframe == 5 then
 		self.currentAnimation = GLBlockAnim
-		GLHurtbox:shift(self.width +32)
 	elseif self.blocking == false and self.blockframe > 0 then
 		self.currentAnimation = GLBlockFROMAnim
 		local anim = self.currentAnimation
@@ -73,7 +81,6 @@ function GeorgeLopez:update(dt)
 			GLBlockFROMAnim:refresh()
 			GLBlockTOAnim:refresh()
 			self.animCancel = true
-			self.currentAnimation = GLIdleAnim
 		end
 	end
 	--crouching code
@@ -94,7 +101,6 @@ function GeorgeLopez:update(dt)
 			GLCrouchFROMAnim:refresh()
 			GLCrouchTOAnim:refresh()
 			self.animCancel = true
-			self.currentAnimation = GLIdleAnim
 		end
 	end
 	self.currentAnimation:update(dt)
@@ -114,16 +120,26 @@ function GeorgeLopez:update(dt)
 	else
 		self.attackFrame = 0
 	end
-	
+	--jumping code
+	if self.y < 290 then
+		self.dy = self.dy + dt * GRAVITY
+		self.jumping = false
+	else
+		self.y = 290
+		self.dy = 0
+		self.jumping = true
+	end
 end
 
 
 
 --rendering 
 function GeorgeLopez:render()
-	--[[section to enable showing hit boxes
+	--section to enable showing hit boxes
 	love.graphics.setColor(0, .05, .25)
 	GLHurtbox:render()
+	love.graphics.setColor(1, 0, 0)
+	GLPunchHB:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
 	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
