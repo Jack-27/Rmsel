@@ -7,7 +7,6 @@ To add your changes use git add -A , then git commit -m 'insert message here' to
 Make sure that you have a complete understanding of something before you change it.
 To Do
 health bar
-JUMPING!!!
 finish hitbox hurtbox and collision detection
 char select
 BUG TEST!!!
@@ -17,6 +16,6 @@ Optimize
 Bug test yet again
 mostly bug test
 bug test a bit more
-get ready for elective showcase
+get ready for elective showcases
 Balance
 get ready for elective showcase

@@ -24,7 +24,7 @@ require 'states/PlayState'
 
 
 function love.load() 
-    love.window.setTitle('Fighter')
+    love.window.setTitle('World Fighter')
     --adds fonts and background
     BigFont = love.graphics.newFont('PrStart.ttf', 64)
     love.graphics.setFont(BigFont)
@@ -44,12 +44,6 @@ function love.load()
         vsync = true,
         canvas = false
     })
-end
-
-function love.keypressed(key)
-    if key == 'escape' then
-        love.event.quit()
-    end
 end
 
 function love.update(dt)
