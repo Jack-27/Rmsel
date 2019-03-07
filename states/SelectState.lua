@@ -7,12 +7,12 @@ function SelectState:enter() end
 function SelectState:exit() end
 
 function SelectState:update(dt) 
-	if love.keyboard.isDown('lshift') then
+	if love.keyboard.isDown('space') then
 		gStateMachine:change('play')
 	end
 end
 
 function SelectState:render()
 	love.graphics.setColor(1, 1, 1, 1)
-	love.graphics.print('press space to continue', 125, 550)
+	love.graphics.print('Press Space to Continue', 260, 550, 0, .5, .5)
 end
