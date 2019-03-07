@@ -3,6 +3,7 @@ PlayState = Class{__includes = BaseState}
 function PlayState:init() end
 	Player1 = GeorgeLopez(100, 290, 1)
     Player2 = ViolenceMan(500, 290, 1)
+    paused = false
    -- UI = UI()
 
 
@@ -16,7 +17,7 @@ function PlayState:update(dt)
    -- UI:update(dt)
    --player one controls
    --uses detect input boolean in order to lock/unlock play using characters
-    if Player1.detectInput == true then
+    if Player1.detectInput == true and paused == false then
         --movement
        if love.keyboard.isDown('left') and Player1.canMove == true then
             Player1.dx = -PLAYER_SPEED
@@ -64,7 +65,7 @@ function PlayState:update(dt)
         Player1:punch()
     end
     --Player 2 controls, literally the same
-    if Player2.detectInput == true then
+    if Player2.detectInput == true and paused == false then
        if love.keyboard.isDown('a') and Player2.canMove == true then
             Player2.dx = -PLAYER_SPEED
             Player2.direction = 1
@@ -101,12 +102,15 @@ function PlayState:update(dt)
         end
         Player2.y = Player2.y + Player2.dy
     end
+    --Pause Function
+    if love.keyboard.isDown('p') then
+        paused = true
+    elseif love.keyboard.isDown('space') then
+        paused = false
+    end
     --updating players
     Player1:update(dt)
     Player2:update(dt)
-
-
-
 
 end
 
@@ -116,7 +120,8 @@ function PlayState:render()
 	--UI:render()
     Player1:render()
     Player2:render()
+    if paused == true then
+        love.graphics.print('*paused*')
+    end
     
-
-
 end
