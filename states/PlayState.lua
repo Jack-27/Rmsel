@@ -108,6 +108,10 @@ function PlayState:update(dt)
     elseif love.keyboard.isDown('space') then
         paused = false
     end
+    if paused == true then
+        Player1.dx = 0
+        Player2.dx = 0
+    end
     --updating players
     Player1:update(dt)
     Player2:update(dt)
