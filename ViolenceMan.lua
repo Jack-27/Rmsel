@@ -6,8 +6,8 @@ function ViolenceMan:init(x, y, dir)
 	self.y = y
 	self.dx = 0
 	self.dy = 0
-	self.width = 64
-	self.height = 64
+	self.width = 256
+	self.height = 256
 	self.currentAnimation = VMIdleAnim
 	self.direction = dir
 	self.offset = 0
@@ -23,6 +23,15 @@ function ViolenceMan:init(x, y, dir)
 	self.detectInput = true
 	self.jumping = true
 	self.jumpHeight = 18
+	self.Hurtboxx = self.x + 70
+	self.Hurtboxy = self.y + 20
+	self.HurtboxWidth = 75
+	self.HurtboxHeight = 232
+	VMHurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
+	VMPunchHB = Hurtbox(self.x - 150, self.y + 120, 152, 20)
+	VMSKickHB = Hurtbox(self.x, self.y + 145, 32, 50)
+	VMSPunchHB = Hurtbox(self.x - 70, self.y + 82, 110, 20)
+
 
 	
 end
@@ -31,7 +40,7 @@ function ViolenceMan:update(dt)
 	local anim = self.currentAnimation
 
 	if self.direction == -1 then
-		self.offset = 256
+		self.offset = 210
 	else
 		self.offset = 0
 	end
@@ -46,6 +55,17 @@ function ViolenceMan:update(dt)
 	    	self.currentAnimation = VMIdleAnim
 	    	VMWalkAnim:refresh()
 	    end
+	end
+
+	VMHurtbox:move(self.x + 70, self.y + 20)
+	if self.direction == 1 then 
+		VMPunchHB:move(self.x - 100, self.y + 80)
+		VMSKickHB:move(self.x, self.y + 155)
+		VMSPunchHB:move(self.x - 70, self.y + 95)
+	else
+		VMPunchHB:move(self.x + self.HurtboxWidth + 62, self.y + 80)
+		VMSKickHB:move(self.x + 170, self.y + 155)
+		VMSPunchHB:move(self.x + self.HurtboxWidth + 90, self.y + 95)
 	end
 	
 	if self.blocking == true and self.blockframe < 5 then
@@ -116,6 +136,15 @@ end
 
 
 function ViolenceMan:render()
+	--section to enable showing hit boxes
+	love.graphics.setColor(1, 0, 0)
+	VMPunchHB:render()
+	VMSPunchHB:render()	
+	VMSKickHB:render()
+	--VMSKickHB:render()--]]
+	love.graphics.setColor(0, .05, .25)
+	VMHurtbox:render()
+	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
 	love.graphics.draw(VMgSprites[anim.texture], VMgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
 end

@@ -123,6 +123,7 @@ function PlayState:render()
     --drawing players
 	--UI:render()
     Player1:render()
+    love.graphics.setColor(1, 1, 1)
     Player2:render()
     if paused == true then
         love.graphics.print('*paused*')

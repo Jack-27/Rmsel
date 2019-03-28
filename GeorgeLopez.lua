@@ -144,14 +144,14 @@ end
 --rendering 
 function GeorgeLopez:render()
 	--section to enable showing hit boxes
-	--[[love.graphics.setColor(1, 0, 0)
+	love.graphics.setColor(1, 0, 0)
 	GLPunchHB:render()
 	--GLSPunchHB:render()
 	GLKickHB:render()
-	GLSKickHB:render()--]]
+	GLSKickHB:render()
 	love.graphics.setColor(0, .05, .25)
 	GLHurtbox:render()
-	love.graphics.setColor(1, 1, 1)--]]
+	love.graphics.setColor(1, 1, 1)
 	local anim = self.currentAnimation
 	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
 end
