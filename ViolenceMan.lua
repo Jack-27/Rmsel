@@ -136,12 +136,12 @@ end
 
 
 function ViolenceMan:render()
-	--section to enable showing hit boxes
+	--[[section to enable showing hit boxes
 	love.graphics.setColor(1, 0, 0)
 	VMPunchHB:render()
 	VMSPunchHB:render()	
 	VMSKickHB:render()
-	--VMSKickHB:render()--]]
+	--VMSKickHB:render()
 	love.graphics.setColor(0, .05, .25)
 	VMHurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
