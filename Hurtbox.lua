@@ -1,4 +1,4 @@
--Hurtbox = Class{}
+Hurtbox = Class{}
 
 
 function Hurtbox:init(x, y, width, height)
