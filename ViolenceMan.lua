@@ -136,7 +136,7 @@ end
 
 
 function ViolenceMan:render()
-	--[[section to enable showing hit boxes
+	--section to enable showing hit boxes
 	love.graphics.setColor(1, 0, 0)
 	self.PunchHB:render()
 	self.SPunchHB:render()	

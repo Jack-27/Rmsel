@@ -96,11 +96,11 @@ function GeorgeLopez:update(dt)
 		self.crouchframe = anim.currentFrame
 	elseif self.crouching == true and self.crouchframe == 4 then
 		self.currentAnimation = GLCrouchAnim
-		GLHurtbox:shifth(170, 36)
+		self.Hurtbox:shifth(170, 36)
 	elseif self.crouching == false and self.crouchframe > 0 then
 		self.currentAnimation = GLCrouchFROMAnim
 		local anim = self.currentAnimation
-		GLHurtbox:reset()
+		self.Hurtbox:reset()
 		self.crouchframe = (4 - anim.currentFrame)
 	else
 		if self.attacking == false and self.dx == 0 then
@@ -143,12 +143,12 @@ end
 
 --rendering 
 function GeorgeLopez:render()
-	--[[section to enable showing hit boxes
+	--section to enable showing hit boxes
 	love.graphics.setColor(1, 0, 0)
 	self.PunchHB:render()
 	--GLSPunchHB:render()
 	self.KickHB:render()
-	self.SKick:render()
+	self.SKickHB:render()
 	love.graphics.setColor(0, .05, .25)
 	self.Hurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
@@ -162,10 +162,8 @@ function GeorgeLopez:punch()
 		self.canMove = false
 		self.detectInput = false
 		self.attacking = true
-	elseif self.attackFrame < 10 and self.attackFrame > 4  then
-		if self.PunchHB:collide(Player1.Hurtbox) then
-			love.graphics.setColor(1, 0, 0)
-		end
+	elseif self.attackFrame < 10 and self.attackFrame > 4 then
+		
 	elseif self.attackFrame > 14 then
 		self.canMove = false
 	elseif self.attackFrame == 14 then

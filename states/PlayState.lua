@@ -4,7 +4,7 @@ function PlayState:init() end
 	Player1 = GeorgeLopez(100, 290, 1)
     Player2 = ViolenceMan(500, 290, 1)
     paused = false
-   -- UI = UI()
+    UI = UI()
 
 
 function PlayState:enter() end
@@ -14,7 +14,7 @@ function PlayState:exit() end
 
 
 function PlayState:update(dt) 
-   -- UI:update(dt)
+   UI:update(dt)
    --player one controls
    --uses detect input boolean in order to lock/unlock play using characters
     if Player1.detectInput == true and paused == false then
@@ -91,6 +91,9 @@ function PlayState:update(dt)
             Player2:spunch()
         elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:punch()
+            if Player2.PunchHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
+                UI:damage(P1, 10)
+            end
         end
         if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:skick()
@@ -121,7 +124,7 @@ end
 
 function PlayState:render() 
     --drawing players
-	--UI:render()
+	UI:render()
     Player1:render()
     love.graphics.setColor(1, 1, 1)
     Player2:render()
