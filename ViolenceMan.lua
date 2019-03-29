@@ -27,10 +27,10 @@ function ViolenceMan:init(x, y, dir)
 	self.Hurtboxy = self.y + 20
 	self.HurtboxWidth = 75
 	self.HurtboxHeight = 232
-	VMHurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
-	VMPunchHB = Hurtbox(self.x - 150, self.y + 120, 152, 20)
-	VMSKickHB = Hurtbox(self.x, self.y + 145, 32, 50)
-	VMSPunchHB = Hurtbox(self.x - 70, self.y + 82, 110, 20)
+	self.Hurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
+	self.PunchHB = Hurtbox(self.x - 150, self.y + 120, 152, 20)
+	self.SKickHB = Hurtbox(self.x, self.y + 145, 32, 50)
+	self.SPunchHB = Hurtbox(self.x - 70, self.y + 82, 110, 20)
 
 
 	
@@ -57,15 +57,15 @@ function ViolenceMan:update(dt)
 	    end
 	end
 
-	VMHurtbox:move(self.x + 70, self.y + 20)
+	self.Hurtbox:move(self.x + 70, self.y + 20)
 	if self.direction == 1 then 
-		VMPunchHB:move(self.x - 100, self.y + 80)
-		VMSKickHB:move(self.x, self.y + 155)
-		VMSPunchHB:move(self.x - 70, self.y + 95)
+		self.PunchHB:move(self.x - 100, self.y + 80)
+		self.SKickHB:move(self.x, self.y + 155)
+		self.SPunchHB:move(self.x - 70, self.y + 95)
 	else
-		VMPunchHB:move(self.x + self.HurtboxWidth + 62, self.y + 80)
-		VMSKickHB:move(self.x + 170, self.y + 155)
-		VMSPunchHB:move(self.x + self.HurtboxWidth + 90, self.y + 95)
+		self.PunchHB:move(self.x + self.HurtboxWidth + 62, self.y + 80)
+		self.SKickHB:move(self.x + 170, self.y + 155)
+		self.SPunchHB:move(self.x + self.HurtboxWidth + 90, self.y + 95)
 	end
 	
 	if self.blocking == true and self.blockframe < 5 then
@@ -138,12 +138,12 @@ end
 function ViolenceMan:render()
 	--[[section to enable showing hit boxes
 	love.graphics.setColor(1, 0, 0)
-	VMPunchHB:render()
-	VMSPunchHB:render()	
-	VMSKickHB:render()
+	self.PunchHB:render()
+	self.SPunchHB:render()	
+	self.SKickHB:render()
 	--VMSKickHB:render()
 	love.graphics.setColor(0, .05, .25)
-	VMHurtbox:render()
+	self.Hurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
 	love.graphics.draw(VMgSprites[anim.texture], VMgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)

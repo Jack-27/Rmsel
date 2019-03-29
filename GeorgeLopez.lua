@@ -28,10 +28,10 @@ function GeorgeLopez:init(x, y, dir)
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64
 	self.HurtboxHeight = self.height - 50
-	GLHurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
-	GLPunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
-	GLKickHB = Hurtbox(self.x, self.y + 215, 32, 25)
-	GLSKickHB = Hurtbox(self.x, self.y + 32, 256, 64)
+	self.Hurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
+	self.PunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
+	self.KickHB = Hurtbox(self.x, self.y + 215, 32, 25)
+	self.SKickHB = Hurtbox(self.x, self.y + 32, 256, 64)
 
 
 
@@ -59,15 +59,15 @@ function GeorgeLopez:update(dt)
 	    end
 	end
 	--hitbox update
-	GLHurtbox:move(self.x + 32, self.y + 50)
+	self.Hurtbox:move(self.x + 32, self.y + 50)
 	if self.direction == 1 then 
-		GLPunchHB:move(self.x, self.y + 120)
-		GLKickHB:move(self.x, self.y + 215)
-		GLSKickHB:move(self.x, self.y + 32)
+		self.PunchHB:move(self.x, self.y + 120)
+		self.KickHB:move(self.x, self.y + 215)
+		self.SKickHB:move(self.x, self.y + 32)
 	else
-		GLPunchHB:move(self.x + self.HurtboxWidth + 32, self.y + 120)
-		GLKickHB:move(self.x + self.HurtboxWidth + 32, self.y + 215)
-		GLSKickHB:move(self.x, self.y + 32)
+		self.PunchHB:move(self.x + self.HurtboxWidth + 32, self.y + 120)
+		self.KickHB:move(self.x + self.HurtboxWidth + 32, self.y + 215)
+		self.SKickHB:move(self.x, self.y + 32)
 	end
 	--blocking code
 	if self.blocking == true and self.blockframe < 5 then
@@ -145,12 +145,12 @@ end
 function GeorgeLopez:render()
 	--[[section to enable showing hit boxes
 	love.graphics.setColor(1, 0, 0)
-	GLPunchHB:render()
+	self.PunchHB:render()
 	--GLSPunchHB:render()
-	GLKickHB:render()
-	GLSKickHB:render()
+	self.KickHB:render()
+	self.SKick:render()
 	love.graphics.setColor(0, .05, .25)
-	GLHurtbox:render()
+	self.Hurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
 	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
@@ -162,6 +162,10 @@ function GeorgeLopez:punch()
 		self.canMove = false
 		self.detectInput = false
 		self.attacking = true
+	elseif self.attackFrame < 10 and self.attackFrame > 4  then
+		if self.PunchHB:collide(Player1.Hurtbox) then
+			love.graphics.setColor(1, 0, 0)
+		end
 	elseif self.attackFrame > 14 then
 		self.canMove = false
 	elseif self.attackFrame == 14 then
