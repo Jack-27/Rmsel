@@ -5,6 +5,8 @@ function PlayState:init() end
     Player2 = ViolenceMan(500, 290, 1)
     paused = false
     UI = UI()
+    Player1Atk = nil
+    Player2Atk = nil
 
 
 function PlayState:enter() end
@@ -50,6 +52,10 @@ function PlayState:update(dt)
             Player1:spunch()
         elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:punch()
+
+            if Player1.PunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Punch'], 4, 6)))
+            end
         end
         if love.keyboard.isDown('.') and love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:skick()
@@ -94,6 +100,7 @@ function PlayState:update(dt)
             if Player2.PunchHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
                 UI:damage(P1, 10)
             end
+            
         end
         if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:skick()

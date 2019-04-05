@@ -157,8 +157,9 @@ function ViolenceMan:punch()
 		self.attacking = true
 		self.xoffset = 256
 		self.yoffset = 256
-	elseif self.attackFrame > 21 then
+	elseif self.attackFrame > 21 and delf.attackFrame < 15 then
 		self.canMove = false
+		
 	elseif self.attackFrame == 21 then
 		self.canMove = true
 		self.detectInput = true

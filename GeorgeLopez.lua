@@ -24,6 +24,7 @@ function GeorgeLopez:init(x, y, dir)
 	self.detectInput = true
 	self.jumping = true
 	self.jumpHeight = 20
+
 	self.Hurtboxx = self.x 
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64
@@ -32,6 +33,11 @@ function GeorgeLopez:init(x, y, dir)
 	self.PunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
 	self.KickHB = Hurtbox(self.x, self.y + 215, 32, 25)
 	self.SKickHB = Hurtbox(self.x, self.y + 32, 256, 64)
+	-- remember sub.string and tonumber
+	self.AttackData = {
+		['Punch'] = '041005',
+		['Kick'] = '071108'
+ 	}
 
 
 
