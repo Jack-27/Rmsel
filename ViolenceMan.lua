@@ -157,6 +157,7 @@ function ViolenceMan:punch()
 		self.attacking = true
 		self.xoffset = 256
 		self.yoffset = 256
+		self.Attack = 'punch'
 	elseif self.attackFrame > 21 and delf.attackFrame < 15 then
 		self.canMove = false
 		
@@ -167,6 +168,7 @@ function ViolenceMan:punch()
 		self.attacking = false
 		self.xoffset = 0
 		self.yoffset = 0
+		self.attack = nil
 		VMPunchAnim:refresh()
 	end
 end
@@ -177,6 +179,7 @@ function ViolenceMan:kick()
 		self.detectInput = false
 		self.currentAnimation = VMKickAnim
 		self.attacking = true
+		self.Attack = 'kick'
 		--Cannonball =
 
 	elseif self.attackFrame > 13 then
@@ -186,6 +189,7 @@ function ViolenceMan:kick()
 		self.detectInput = true
 		self.currentAnimation = VMIdleAnim
 		self.attacking = false
+		self.attack = nil
 		VMKickAnim:refresh()
 	end
 end
@@ -196,6 +200,7 @@ function ViolenceMan:skick()
 		self.detectInput = false
 		self.currentAnimation = VMSKickAnim
 		self.attacking = true
+		self.Attack = 'spunch'
 
 	elseif self.attackFrame > 22 then
 		self.canMove = false
@@ -204,6 +209,7 @@ function ViolenceMan:skick()
 		self.detectInput = true
 		self.currentAnimation = VMIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		VMSKickAnim:refresh()
 	end
 end
@@ -214,6 +220,7 @@ function ViolenceMan:spunch()
 		self.detectInput = false
 		self.currentAnimation = VMSPunchAnim
 		self.attacking = true
+		self.Attack = 'spunch'
 
 	elseif self.attackFrame > 7 then
 		self.canMove = false
@@ -222,6 +229,7 @@ function ViolenceMan:spunch()
 		self.detectInput = true
 		self.currentAnimation = VMIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		VMSPunchAnim:refresh()
 	end
 end

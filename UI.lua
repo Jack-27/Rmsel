@@ -21,7 +21,7 @@ end
 function UI:damage(player, damage)
 	if player == 'P1' then
 		self.P1HP = self.P1HP - damage
-	else
+	else--[[if player == 'P2' then--]]
 		self.P2HP = self.P2HP - damage
 	end
 end

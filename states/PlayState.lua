@@ -52,10 +52,6 @@ function PlayState:update(dt)
             Player1:spunch()
         elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:punch()
-
-            if Player1.PunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
-                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Punch'], 4, 6)))
-            end
         end
         if love.keyboard.isDown('.') and love.keyboard.isDown('/') and Player1.jumping == true then
             Player1:skick()
@@ -67,8 +63,12 @@ function PlayState:update(dt)
             Player1.dy = - Player1.jumpHeight
         end
         Player1.y = Player1.y + Player1.dy
-    else
-        Player1:punch()
+        if Player1.Attack == 'punch' and Player1.attackFrame --[[> tonumber(string.sub(Player1.AttackData['Punch'], 1, 2))--]] then
+            if Player1.PunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) --[[and Player1.attackFrame < tonumber(string.sub(Player1.AttackData['Punch'], 3, 4))--]]  then
+                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Punch'], 4, 6)))
+                Player1.Attack = nil
+            end
+        end
     end
     --Player 2 controls, literally the same
     if Player2.detectInput == true and paused == false then

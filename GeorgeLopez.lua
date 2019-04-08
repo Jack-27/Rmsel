@@ -34,6 +34,7 @@ function GeorgeLopez:init(x, y, dir)
 	self.KickHB = Hurtbox(self.x, self.y + 215, 32, 25)
 	self.SKickHB = Hurtbox(self.x, self.y + 32, 256, 64)
 	-- remember sub.string and tonumber
+	self.Attack = nil
 	self.AttackData = {
 		['Punch'] = '041005',
 		['Kick'] = '071108'
@@ -168,6 +169,7 @@ function GeorgeLopez:punch()
 		self.canMove = false
 		self.detectInput = false
 		self.attacking = true
+		self.Attack = 'punch'
 	elseif self.attackFrame < 10 and self.attackFrame > 4 then
 		
 	elseif self.attackFrame > 14 then
@@ -177,6 +179,7 @@ function GeorgeLopez:punch()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
+		self.attack = nil
 		GLPunchAnim:refresh()
 	end
 end
@@ -187,6 +190,7 @@ function GeorgeLopez:kick()
 		self.detectInput = false
 		self.currentAnimation = GLKickAnim
 		self.attacking = true
+		self.Attack = 'kick'
 
 	elseif self.attackFrame > 15 then
 		self.canMove = false
@@ -195,6 +199,7 @@ function GeorgeLopez:kick()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		GLKickAnim:refresh()
 	end
 end
@@ -205,6 +210,7 @@ function GeorgeLopez:skick()
 		self.detectInput = false
 		self.currentAnimation = GLSKickAnim
 		self.attacking = true
+		self.Attack = 'skick'
 
 	elseif self.attackFrame > 13 then
 		self.canMove = false
@@ -213,6 +219,7 @@ function GeorgeLopez:skick()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		GLSKickAnim:refresh()
 	end
 end
@@ -223,6 +230,7 @@ function GeorgeLopez:spunch()
 		self.detectInput = false
 		self.currentAnimation = GLSPunchAnim
 		self.attacking = true
+		self.Attack = 'spunch'
 
 	elseif self.attackFrame > 12 then
 		self.canMove = false
@@ -231,6 +239,7 @@ function GeorgeLopez:spunch()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		GLSPunchAnim:refresh()
 	end
 end
