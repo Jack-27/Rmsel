@@ -36,8 +36,10 @@ function GeorgeLopez:init(x, y, dir)
 	-- remember sub.string and tonumber
 	self.Attack = nil
 	self.AttackData = {
-		['Punch'] = '041005',
-		['Kick'] = '071108'
+		['Punch'] = '0405',
+		['Kick'] = '0708',
+		['SPunch'] = nil,
+		['SKick'] = '0509'
  	}
 
 
@@ -179,7 +181,7 @@ function GeorgeLopez:punch()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
-		self.attack = nil
+		self.Attack = nil
 		GLPunchAnim:refresh()
 	end
 end

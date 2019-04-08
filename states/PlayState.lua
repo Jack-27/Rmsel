@@ -5,8 +5,6 @@ function PlayState:init() end
     Player2 = ViolenceMan(500, 290, 1)
     paused = false
     UI = UI()
-    Player1Atk = nil
-    Player2Atk = nil
 
 
 function PlayState:enter() end
@@ -63,12 +61,7 @@ function PlayState:update(dt)
             Player1.dy = - Player1.jumpHeight
         end
         Player1.y = Player1.y + Player1.dy
-        if Player1.Attack == 'punch' and Player1.attackFrame --[[> tonumber(string.sub(Player1.AttackData['Punch'], 1, 2))--]] then
-            if Player1.PunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) --[[and Player1.attackFrame < tonumber(string.sub(Player1.AttackData['Punch'], 3, 4))--]]  then
-                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Punch'], 4, 6)))
-                Player1.Attack = nil
-            end
-        end
+        
     end
     --Player 2 controls, literally the same
     if Player2.detectInput == true and paused == false then
@@ -112,6 +105,22 @@ function PlayState:update(dt)
         end
         Player2.y = Player2.y + Player2.dy
     end
+    if Player1.Attack == 'punch' and Player1.attackFrame > 4--[[tonumber(string.sub(Player1.AttackData['Punch'], 1, 2))]] then
+            if Player1.PunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Punch'], 3, 4)))
+                Player1.Attack = nil
+            end
+        elseif Player1.Attack == 'kick' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['Kick'], 1, 2)) then
+            if Player1.KickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Kick'], 3, 4)))
+                Player1.Attack = nil
+            end
+        elseif Player1.Attack == 'skick' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SKick'], 1, 2)) then
+            if Player1.SPunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+                UI:damage(P2, tonumber(string.sub(Player1.AttackData['SKick'], 3, 4)))
+                Player1.Attack = nil
+            end
+        end
     --Pause Function
     if love.keyboard.isDown('p') then
         paused = true
