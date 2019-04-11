@@ -232,7 +232,6 @@ function GeorgeLopez:spunch()
 		self.detectInput = false
 		self.currentAnimation = GLSPunchAnim
 		self.attacking = true
-		self.Attack = 'spunch'
 
 	elseif self.attackFrame > 12 then
 		self.canMove = false
@@ -241,7 +240,6 @@ function GeorgeLopez:spunch()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
-		self.Attack = nil
 		GLSPunchAnim:refresh()
 	end
 end

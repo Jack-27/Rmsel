@@ -31,6 +31,13 @@ function ViolenceMan:init(x, y, dir)
 	self.PunchHB = Hurtbox(self.x - 150, self.y + 120, 152, 20)
 	self.SKickHB = Hurtbox(self.x, self.y + 145, 32, 50)
 	self.SPunchHB = Hurtbox(self.x - 70, self.y + 82, 110, 20)
+	self.Attack = nil
+	self.AttackData = {
+		['Punch'] = '1111',
+		['Kick'] = 'blep blop',
+		['SPunch'] = '0508',
+		['SKick'] = '1815'
+ 	}
 
 
 	
@@ -179,7 +186,6 @@ function ViolenceMan:kick()
 		self.detectInput = false
 		self.currentAnimation = VMKickAnim
 		self.attacking = true
-		self.Attack = 'kick'
 		--Cannonball =
 
 	elseif self.attackFrame > 13 then
@@ -189,7 +195,6 @@ function ViolenceMan:kick()
 		self.detectInput = true
 		self.currentAnimation = VMIdleAnim
 		self.attacking = false
-		self.attack = nil
 		VMKickAnim:refresh()
 	end
 end

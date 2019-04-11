@@ -28,7 +28,6 @@ function love.load()
     BigFont = love.graphics.newFont('PrStart.ttf', 64)
     love.graphics.setFont(BigFont)
     love.graphics.setDefaultFilter('nearest', 'nearest')
-	local background = love.graphics.newImage('Sprites/Backgrounds/TempBackground.png')
 	love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
     --adds all the states to the state 
 	gStateMachine = StateMachine {

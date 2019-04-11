@@ -1,10 +1,11 @@
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init() end
+function PlayState:init() 
+    Player2 = ViolenceMan(1200, 290, 1)
 	Player1 = GeorgeLopez(100, 290, 1)
-    Player2 = ViolenceMan(500, 290, 1)
     paused = false
     UI = UI()
+end
 
 
 function PlayState:enter() end
@@ -90,9 +91,6 @@ function PlayState:update(dt)
             Player2:spunch()
         elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') and Player2.jumping == true then
             Player2:punch()
-            if Player2.PunchHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
-                UI:damage(P1, 10)
-            end
             
         end
         if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true then
@@ -105,7 +103,7 @@ function PlayState:update(dt)
         end
         Player2.y = Player2.y + Player2.dy
     end
-    if Player1.Attack == 'punch' and Player1.attackFrame > 4--[[tonumber(string.sub(Player1.AttackData['Punch'], 1, 2))]] then
+    if Player1.Attack == 'punch' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['Punch'], 1, 2)) then
             if Player1.PunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
                 UI:damage(P2, tonumber(string.sub(Player1.AttackData['Punch'], 3, 4)))
                 Player1.Attack = nil
@@ -116,9 +114,35 @@ function PlayState:update(dt)
                 Player1.Attack = nil
             end
         elseif Player1.Attack == 'skick' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SKick'], 1, 2)) then
-            if Player1.SPunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+            if Player1.SKickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
                 UI:damage(P2, tonumber(string.sub(Player1.AttackData['SKick'], 3, 4)))
                 Player1.Attack = nil
+            end
+        elseif Player1.Attack == 'spunch' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SPunch'], 1, 2)) then
+            if Player1.SKickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+                UI:damage(P2, tonumber(string.sub(Player1.AttackData['SPunch'], 3, 4)))
+                Player1.Attack = nil
+            end
+        end
+    if Player2.Attack == 'punch' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['Punch'], 1, 2)) then
+            if Player2.PunchHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
+                UI:damage(P1, tonumber(string.sub(Player1.AttackData['Punch'], 3, 4)))
+                Player2.Attack = nil
+            end
+        elseif Player2.Attack == 'kick' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['Kick'], 1, 2)) then
+            if Player2.KickHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
+                UI:damage(P1, tonumber(string.sub(Player2.AttackData['Kick'], 3, 4)))
+                Player2.Attack = nil
+            end
+        elseif Player2.Attack == 'skick' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['SKick'], 1, 2)) then
+            if Player2.SKickHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
+                UI:damage(P1, tonumber(string.sub(Player2.AttackData['SKick'], 3, 4)))
+                Player2.Attack = nil
+            end
+        elseif Player2.Attack == 'spunch' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['SPunch'], 1, 2)) then
+            if Player2.SKickHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
+                UI:damage(P1, tonumber(string.sub(Player2.AttackData['SPunch'], 3, 4)))
+                Player2.Attack = nil
             end
         end
     --Pause Function
