@@ -164,6 +164,7 @@ end
 
 function PlayState:render() 
     --drawing players
+    love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/Background.png'), 0, 0)
 	UI:render()
     Player1:render()
     love.graphics.setColor(1, 1, 1)

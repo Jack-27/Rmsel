@@ -54,7 +54,6 @@ function love.update(dt)
 end
 function love.draw()
     --adds background, lets statemachine draw, and fixes the mem leak
-	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/Background.png'), 0, 0)
 	gStateMachine:render()
     collectgarbage( 'collect' )
 end
