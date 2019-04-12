@@ -152,7 +152,7 @@ end
 
 --rendering 
 function GeorgeLopez:render()
-	--section to enable showing hit boxes
+	--[[section to enable showing hit boxes
 	love.graphics.setColor(1, 0, 0)
 	self.PunchHB:render()
 	--GLSPunchHB:render()

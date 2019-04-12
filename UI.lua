@@ -19,18 +19,18 @@ function UI:update(dt)
 end
 
 function UI:damage(player, damage)
-	if player == 'P1' then
+	if player == 1 then
 		self.P1HP = self.P1HP - damage
-	else--[[if player == 'P2' then--]]
+	elseif player == 2 then
 		self.P2HP = self.P2HP - damage
 	end
 end
 
 function UI:render()
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.rectangle('fill', 20, 20, 500, 50)
-	love.graphics.rectangle('fill', WINDOW_WIDTH - 520, 20, 500, 50)
-	love.graphics.print(90 - self.time, WINDOW_WIDTH / 2, 20)
+	love.graphics.rectangle('fill', 10, 20, 510, 50)
+	love.graphics.rectangle('fill', WINDOW_WIDTH - 520, 20, 508, 50)
+	love.graphics.print(math.floor(90 - self.time), WINDOW_WIDTH / 2 - 50, 20)
 	love.graphics.setColor(1, 0, 0)
 	love.graphics.rectangle('fill', 16, 24, self.P1HP * 5 - 2, 42)
 	love.graphics.rectangle('fill', WINDOW_WIDTH - 516, 24, self.P2HP * 5 - 2, 42)

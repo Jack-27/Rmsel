@@ -1,10 +1,9 @@
 # Rmsel
 The first RMSEL game.
 To Do
-health bar(done)
-JUMPING!!!(done)
-finish hitbox hurtbox and collision detection(wip)
-char select
+Projectiles
+ending the game 
+blocks
 BUG TEST!!!
 polish titlescreen --> char select --> three rounds --> rematch, or back to char select screen.\
 Bug test again :)

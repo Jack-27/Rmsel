@@ -105,43 +105,43 @@ function PlayState:update(dt)
     end
     if Player1.Attack == 'punch' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['Punch'], 1, 2)) then
             if Player1.PunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
-                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Punch'], 3, 4)))
+                UI:damage(2, tonumber(string.sub(Player1.AttackData['Punch'], 3, 4)))
                 Player1.Attack = nil
             end
         elseif Player1.Attack == 'kick' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['Kick'], 1, 2)) then
             if Player1.KickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
-                UI:damage(P2, tonumber(string.sub(Player1.AttackData['Kick'], 3, 4)))
+                UI:damage(2, tonumber(string.sub(Player1.AttackData['Kick'], 3, 4)))
                 Player1.Attack = nil
             end
         elseif Player1.Attack == 'skick' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SKick'], 1, 2)) then
             if Player1.SKickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
-                UI:damage(P2, tonumber(string.sub(Player1.AttackData['SKick'], 3, 4)))
+                UI:damage(2, tonumber(string.sub(Player1.AttackData['SKick'], 3, 4)))
                 Player1.Attack = nil
             end
         elseif Player1.Attack == 'spunch' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SPunch'], 1, 2)) then
             if Player1.SKickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
-                UI:damage(P2, tonumber(string.sub(Player1.AttackData['SPunch'], 3, 4)))
+                UI:damage(2, tonumber(string.sub(Player1.AttackData['SPunch'], 3, 4)))
                 Player1.Attack = nil
             end
         end
     if Player2.Attack == 'punch' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['Punch'], 1, 2)) then
             if Player2.PunchHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
-                UI:damage(P1, tonumber(string.sub(Player1.AttackData['Punch'], 3, 4)))
+                UI:damage(1, tonumber(string.sub(Player1.AttackData['Punch'], 3, 4)))
                 Player2.Attack = nil
             end
         elseif Player2.Attack == 'kick' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['Kick'], 1, 2)) then
             if Player2.KickHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
-                UI:damage(P1, tonumber(string.sub(Player2.AttackData['Kick'], 3, 4)))
+                UI:damage(1, tonumber(string.sub(Player2.AttackData['Kick'], 3, 4)))
                 Player2.Attack = nil
             end
         elseif Player2.Attack == 'skick' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['SKick'], 1, 2)) then
             if Player2.SKickHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
-                UI:damage(P1, tonumber(string.sub(Player2.AttackData['SKick'], 3, 4)))
+                UI:damage(1, tonumber(string.sub(Player2.AttackData['SKick'], 3, 4)))
                 Player2.Attack = nil
             end
         elseif Player2.Attack == 'spunch' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['SPunch'], 1, 2)) then
             if Player2.SKickHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
-                UI:damage(P1, tonumber(string.sub(Player2.AttackData['SPunch'], 3, 4)))
+                UI:damage(1, tonumber(string.sub(Player2.AttackData['SPunch'], 3, 4)))
                 Player2.Attack = nil
             end
         end
