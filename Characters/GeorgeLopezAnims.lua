@@ -1,5 +1,5 @@
-require 'Animation'
-require 'Util'
+require 'Utilities/Animation'
+require 'Utilities/Util'
 
 --adds all the pictures
 GLgSprites = {

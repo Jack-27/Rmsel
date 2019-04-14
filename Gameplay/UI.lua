@@ -32,8 +32,8 @@ function UI:render()
 	love.graphics.rectangle('fill', WINDOW_WIDTH - 520, 20, 508, 50)
 	love.graphics.print(math.floor(90 - self.time), WINDOW_WIDTH / 2 - 50, 20)
 	love.graphics.setColor(1, 0, 0)
-	love.graphics.rectangle('fill', 16, 24, self.P1HP * 5 - 2, 42)
-	love.graphics.rectangle('fill', WINDOW_WIDTH - 516, 24, self.P2HP * 5 - 2, 42)
+	love.graphics.rectangle('fill', 16, 24, self.P2HP * 5 - 2, 42)
+	love.graphics.rectangle('fill', WINDOW_WIDTH - 516, 24, self.P1HP * 5 - 2, 42)
 	love.graphics.setColor(1, 1, 1)
 
 

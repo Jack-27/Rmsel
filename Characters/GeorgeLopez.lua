@@ -1,6 +1,6 @@
 GeorgeLopez = Class{}
 
-require 'GeorgeLopezAnims'
+require 'Characters/GeorgeLopezAnims'
 function GeorgeLopez:init(x, y, dir)
 	--inits all the vars tried to make them self explainatory
 	self.x = x

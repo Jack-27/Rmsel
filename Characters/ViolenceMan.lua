@@ -1,6 +1,6 @@
 ViolenceMan = Class{}
 
-require 'ViolenceManAnims'
+require 'Characters/ViolenceManAnims'
 function ViolenceMan:init(x, y, dir)
 	self.x = x
 	self.y = y

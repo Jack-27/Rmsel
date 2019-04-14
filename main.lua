@@ -1,21 +1,22 @@
 
-
-
 --Alright
-Push = require 'Push'
-Class = require 'Class'
+Push = require 'Utilities/Push'
+Class = require 'Utilities/Class'
 
 
 --Miscalleneous
-require 'Util'
-require 'Animation'
+require 'Gameplay/Projectile'
+require 'Gameplay/Projectiles'
+require 'Utilities/Util'
+require 'Utilities/Animation'
 require 'Settings'
-require 'StateMachine'
-require 'Hurtbox'
-require 'UI'
+require 'Utilities/StateMachine'
+require 'Gameplay/Hurtbox'
+require 'Gameplay/UI'
+
 --characters
-require 'ViolenceMan'
-require 'GeorgeLopez'
+require 'Characters/ViolenceMan'
+require 'Characters/GeorgeLopez'
 --states
 require 'states/BaseState'
 require 'states/TitleState'
@@ -25,7 +26,7 @@ require 'states/PlayState'
 
 function love.load() 
     --adds fonts and background
-    BigFont = love.graphics.newFont('PrStart.ttf', 64)
+    BigFont = love.graphics.newFont('Sprites/PrStart.ttf', 64)
     love.graphics.setFont(BigFont)
     love.graphics.setDefaultFilter('nearest', 'nearest')
 	love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
