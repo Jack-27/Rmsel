@@ -12,7 +12,7 @@ function Projectile:init(despawn, speed, picture)
 end
 
 function Projectile:update(dt)
-	if self.dead = false then
+	if self.dead == false then
  		self.time = self.time + dt
 		self.x = self.x + self.speed * self.dir
 		if self.time >= self.despawn then
@@ -22,7 +22,7 @@ function Projectile:update(dt)
 end
 
 function Projectile:render()
-	if self.dead = false then
+	if self.dead == false then
 		love.graphics.draw(self.picture, self.x, self.y, 0, self.dir)
 	end
 end
