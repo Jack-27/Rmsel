@@ -119,7 +119,7 @@ function PlayState:update(dt)
                 Player1.Attack = nil
             end
         elseif Player1.Attack == 'spunch' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SPunch'], 1, 2)) then
-            if Player1.SKickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+            if Player1.SPunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
                 UI:damage(2, tonumber(string.sub(Player1.AttackData['SPunch'], 3, 4)))
                 Player1.Attack = nil
             end
@@ -140,7 +140,7 @@ function PlayState:update(dt)
                 Player2.Attack = nil
             end
         elseif Player2.Attack == 'spunch' and Player2.attackFrame > tonumber(string.sub(Player2.AttackData['SPunch'], 1, 2)) then
-            if Player2.SKickHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
+            if Player2.SPunchHB:collide(Player1.Hurtbox.x, Player1.Hurtbox.width, Player1.Hurtbox.y, Player1.Hurtbox.height) then
                 UI:damage(1, tonumber(string.sub(Player2.AttackData['SPunch'], 3, 4)))
                 Player2.Attack = nil
             end

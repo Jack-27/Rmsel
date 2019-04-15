@@ -31,10 +31,11 @@ function ViolenceMan:init(x, y, dir)
 	self.PunchHB = Hurtbox(self.x - 150, self.y + 120, 152, 20)
 	self.SKickHB = Hurtbox(self.x, self.y + 145, 32, 50)
 	self.SPunchHB = Hurtbox(self.x - 70, self.y + 82, 110, 20)
+	self.KickHB = VMProjectile.hurtbox
 	self.Attack = nil
 	self.AttackData = {
 		['Punch'] = '1111',
-		['Kick'] = 'blep blop',
+		['Kick'] = '0005',
 		['SPunch'] = '0508',
 		['SKick'] = '1815'
  	}
@@ -45,6 +46,7 @@ end
 
 function ViolenceMan:update(dt)
 	local anim = self.currentAnimation
+	self.KickHB = VMProjectile.hurtbox
 
 	if self.direction == -1 then
 		self.offset = 210
@@ -136,8 +138,15 @@ function ViolenceMan:update(dt)
 		self.dy = 0
 		self.jumping = true
 	end
+	if self.direction == 1 then
+		self.dirx = self.x + 60
+	else
+		self.dirx = self.x + 140
+	end
+
 	self.currentAnimation:update(dt)
-end
+	VMProjectile:update(dt)
+end 
 
 
 
@@ -152,6 +161,7 @@ function ViolenceMan:render()
 	love.graphics.setColor(0, .05, .25)
 	self.Hurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
+	VMProjectile:render()
 	local anim = self.currentAnimation
 	love.graphics.draw(VMgSprites[anim.texture], VMgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
 end
@@ -175,7 +185,7 @@ function ViolenceMan:punch()
 		self.attacking = false
 		self.xoffset = 0
 		self.yoffset = 0
-		self.attack = nil
+		self.Attack = nil
 		VMPunchAnim:refresh()
 	end
 end
@@ -186,8 +196,10 @@ function ViolenceMan:kick()
 		self.detectInput = false
 		self.currentAnimation = VMKickAnim
 		self.attacking = true
+		self.Attack = 'kick'
 		--Cannonball =
-
+	elseif self.attackFrame == 8 then
+		VMProjectile:fire(self.dirx, self.y + 200, self.direction)
 	elseif self.attackFrame > 13 then
 		self.canMove = false
 	elseif self.attackFrame == 13 then
