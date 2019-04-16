@@ -15,7 +15,6 @@ end
 function UI:update(dt)
 	self.time = self.time + dt
 
-
 end
 
 function UI:damage(player, damage)

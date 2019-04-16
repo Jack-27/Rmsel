@@ -11,6 +11,10 @@ function Projectile:init(despawn, speed, picture)
 	self.dead = true
 end
 
+function Projectile:cat()
+	self.dead = true
+end
+
 function Projectile:update(dt)
 	if self.dead = false then
  		self.time = self.time + dt
@@ -34,3 +38,4 @@ function Projectile:fire(x, y, dir)
 	self.dir = dir
 	self.time = 0
 end
+

@@ -146,6 +146,7 @@ function ViolenceMan:update(dt)
 
 	self.currentAnimation:update(dt)
 	VMProjectile:update(dt)
+	VMProjectile:cat()
 end 
 
 
