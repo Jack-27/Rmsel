@@ -11,9 +11,6 @@ function Projectile:init(despawn, speed, picture)
 	self.dead = true
 end
 
-function Projectile:cat()
-	self.dead = true
-end
 
 function Projectile:update(dt)
 	if self.dead = false then

@@ -62,7 +62,7 @@ function ViolenceMan:update(dt)
 	elseif self.dx == 0 then
 		if self.attacking == false and self.dx == 0 then
 	    	self.currentAnimation = VMIdleAnim
-	    	VMWalkAnim:refresh()
+			VMWalkAnim:refresh()
 	    end
 	end
 
@@ -146,7 +146,6 @@ function ViolenceMan:update(dt)
 
 	self.currentAnimation:update(dt)
 	VMProjectile:update(dt)
-	VMProjectile:cat()
 end 
 
 
