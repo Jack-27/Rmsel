@@ -93,7 +93,7 @@ function ViolenceMan:update(dt)
 			self.canMove = true
 			VMBlockFROMAnim:refresh()
 			VMBlockTOAnim:refresh()
-			self.animCancel = truem
+			self.animCancel = true
 		end
 	end
 	if self.crouching == true and self.crouchframe < 4 then
