@@ -2,7 +2,7 @@ PlayState = Class{__includes = BaseState}
 
 function PlayState:init() 
     Player1 = ViolenceMan(1200, 290, 1)
-	Player2 = GeorgeLopez(100, 290, 1)
+	Player2 = TonyTheTiger(100, 290, 1)
     paused = false
     UI = UI()
 end
