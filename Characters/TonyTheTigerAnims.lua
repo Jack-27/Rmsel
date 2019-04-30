@@ -28,7 +28,7 @@ TTgFrames = {
     ['punch'] = GenerateQuads(TTgSprites['punch'], 512, 512),
     ['spunch'] = GenerateQuads(TTgSprites['spunch'], 256, 256),
     ['kick'] = GenerateQuads(TTgSprites['kick'], 256, 256),
-    ['skick'] = GenerateQuads(TTgSprites['skick'], 256, 256)
+    ['skick'] = GenerateQuads(TTgSprites['skick'], 512, 512)
 }
 
 TTIdleAnim = Animation({

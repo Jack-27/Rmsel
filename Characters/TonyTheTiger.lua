@@ -53,8 +53,12 @@ function TonyTheTiger:update(dt)
 	end
 	if self.dx < 0 and self.canMove == true then
 		self.currentAnimation = TTWalkAnim
+		self.xoffset = 55
+		self.yoffset = -56
 		self.x = math.max(0, self.x + self.dx * dt)
 	elseif self.dx > 0 then
+		self.xoffset = 55
+		self.yoffset = -56
 		self.currentAnimation = TTWalkAnim
 		self.x = math.min(WINDOW_WIDTH - self.width, self.x + self.dx * dt)
 	elseif self.dx == 0 then
@@ -74,6 +78,26 @@ function TonyTheTiger:update(dt)
 		self.SKickHB:move(self.x + 170, self.y + 155)
 		self.SPunchHB:move(self.x + self.HurtboxWidth + 90, self.y + 95)
 	end
+
+
+
+	if self.currentAnimation == TTIdleAnim then 
+		self.yoffset = 53
+	end
+
+	if self.currentAnimation == TTWalkAnim then 
+		self.yoffset = 53
+	end
+		--[[if self.currentAnimation == TTPunchAnim then 
+		self.xoffset = 110
+		self.yoffset = 37--]]
+
+	if self.currentAnimation == TTSPunchAnim then 
+		self.xoffset = 0
+		self.yoffset = 53
+	end
+
+
 	
 	if self.blocking == true and self.blockframe < 5 then
 		self.currentAnimation = TTBlockTOAnim
@@ -118,6 +142,8 @@ function TonyTheTiger:update(dt)
 		self.attackFrame = anim.currentFrame
 		if self.currentAnimation == TTPunchAnim then
 			self:punch()
+			self.xoffset = 110
+			self.yoffset = 37
 		elseif self.currentAnimation == TTSPunchAnim then
 			self:spunch()
 		elseif self.currentAnimation == TTKickAnim then
@@ -153,8 +179,10 @@ function TonyTheTiger:render()
 	self.Hurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	local anim = self.currentAnimation
-	love.graphics.draw(TTgSprites[anim.texture], TTgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
+	love.graphics.draw(TTgSprites[anim.texture], TTgFrames[anim.texture][anim:getCurrentFrame()], self.x + self.xoffset + self.offset, self.y + self.yoffset, 0, self.direction, 1)
 end
+
+
 
 function TonyTheTiger:punch()
 	if self.attackFrame == 0 then
@@ -162,19 +190,22 @@ function TonyTheTiger:punch()
 		self.detectInput = false
 		self.currentAnimation = TTPunchAnim
 		self.attacking = true
-		self.xoffset = 0
-		self.yoffset = 0
+		self.xoffset = 110
+		self.yoffset = 37
 		self.Attack = 'punch'
-	elseif self.attackFrame > 21 and delf.attackFrame < 15 then
+	elseif self.attackFrame > 25 and delf.attackFrame < 15 then
+		self.xoffset = 0
+		self.yoffset = 53
 		self.canMove = false
+
 		
-	elseif self.attackFrame == 21 then
+	elseif self.attackFrame == 24 then
 		self.canMove = true
 		self.detectInput = true
 		self.currentAnimation = TTIdleAnim
 		self.attacking = false
 		self.xoffset = 0
-		self.yoffset = 0
+		self.yoffset = 53
 		self.attack = nil
 		TTPunchAnim:refresh()
 	end
@@ -186,6 +217,8 @@ function TonyTheTiger:kick()
 		self.detectInput = false
 		self.currentAnimation = TTKickAnim
 		self.attacking = true
+		self.xoffset = 0
+		self.yoffset = 30
 		--Cannonball =
 
 	elseif self.attackFrame > 6 then
@@ -205,11 +238,13 @@ function TonyTheTiger:skick()
 		self.detectInput = false
 		self.currentAnimation = TTSKickAnim
 		self.attacking = true
+		self.xoffset = 300
+		self.yoffset = -56
 		self.Attack = 'spunch'
 
-	elseif self.attackFrame > 22 then
+	elseif self.attackFrame > 64 then
 		self.canMove = false
-	elseif self.attackFrame == 22 then
+	elseif self.attackFrame == 64 then
 		self.canMove = true
 		self.detectInput = true
 		self.currentAnimation = TTIdleAnim
@@ -234,6 +269,8 @@ function TonyTheTiger:spunch()
 		self.detectInput = true
 		self.currentAnimation = TTIdleAnim
 		self.attacking = false
+		self.xoffset = 0
+		self.yoffset = -56
 		self.Attack = nil
 		TTSPunchAnim:refresh()
 	end

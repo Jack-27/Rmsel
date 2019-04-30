@@ -1,15 +1,11 @@
 # Rmsel
-The first RMSEL game.
-To Do
-Projectiles
-ending the game 
-blocks
-BUG TEST!!!
-polish titlescreen --> char select --> three rounds --> rematch, or back to char select screen.\
-Bug test again :)
-Optimize
-Bug test yet again
-mostly bug test
-bug test a bit more
-Balance
-get ready for elective showcase
+List of Bugs:
+Can't crouch/block and hit an attack button
+cant walk backwards and hit an attack button(violence man only)
+violence man nuke comes out frame one
+can attack while jumping
+
+
+
+
+love.graphics.draw(png, 50 + self.currentSelection * 50), Y)

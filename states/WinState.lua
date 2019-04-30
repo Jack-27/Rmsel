@@ -22,6 +22,10 @@ function WinState:update(dt)
 	else
 		self.winner = 'P2'
 	end
+	
+	if love.keyboard.isDown('return') then
+		gStateMachine:change('title')
+	end
 end
 
 function WinState:render()
@@ -33,6 +37,8 @@ function WinState:render()
 		love.graphics.print('Player 1 Wins!', 150, 260)
 	end
 	love.graphics.setColor(1, 1, 1)
+
+	
 
 
 end
