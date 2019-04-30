@@ -16,11 +16,12 @@ require 'Gameplay/UI'
 
 --characters
 require 'Characters/ViolenceMan'
-require 'Characters/GeorgeLopez'
+require 'Characters/TonyTheTiger'
 --states
 require 'states/BaseState'
 require 'states/TitleState'
 require 'states/PlayState'
+require 'states/WinState'
 
 
 
@@ -33,7 +34,8 @@ function love.load()
     --adds all the states to the state 
 	gStateMachine = StateMachine {
         ['title'] = function() return TitleState() end,
-        ['play'] = function() return PlayState() end
+        ['play'] = function() return PlayState() end,
+        ['win'] = function() return WinState() end
     }
     gStateMachine:change('title')
     --honestly this is useless a relic of olden days
