@@ -20,7 +20,7 @@ function ViolenceMan:init(x, y, dir)
 	self.crouchframe = 0
 	self.attacking = false
 	self.attackFrame = 0
-	self.detectInput = true
+	self.canAttack = true
 	self.jumping = true
 	self.jumpHeight = 18
 	self.Hurtboxx = self.x + 70
@@ -163,7 +163,7 @@ function ViolenceMan:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	VMProjectile:render()
 	local anim = self.currentAnimation
-	love.graphics.draw(VMgSprites[anim.texture], VMgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
+	love.graphics.draw(VMgSprites[anim.texture], VMgFrames[anim.texture][anim:getCurrentFrame()], self.x + self.xoffset + self.offset, self.y + self.yoffset, 0, self.direction, 1)
 end
 
 function ViolenceMan:punch()
@@ -175,7 +175,7 @@ function ViolenceMan:punch()
 		self.xoffset = 256
 		self.yoffset = 256
 		self.Attack = 'punch'
-	elseif self.attackFrame > 21 and delf.attackFrame < 15 then
+	elseif self.attackFrame > 21 and self.attackFrame < 15 then
 		self.canMove = false
 		
 	elseif self.attackFrame == 21 then

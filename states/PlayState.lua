@@ -52,14 +52,14 @@ function PlayState:update(dt)
         Player1.blocking = false
     end
     --attacks allowing for the / to change into specials 
-    if love.keyboard.isDown(',') and love.keyboard.isDown('/') and Player1.jumping == true then
+    if love.keyboard.isDown(',') and love.keyboard.isDown('/') and Player1.jumping == true and Player1.canAttack then
         Player1:spunch()
-    elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') and Player1.jumping == true then
+    elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') and Player1.jumping == true and Player1.canAttack then
         Player1:punch()
     end
-    if love.keyboard.isDown('.') and love.keyboard.isDown('/') and Player1.jumping == true then
+    if love.keyboard.isDown('.') and love.keyboard.isDown('/') and Player1.jumping == true  and Player1.canAttack then
         Player1:skick()
-    elseif love.keyboard.isDown('.') and not love.keyboard.isDown('/') and Player1.jumping == true then
+    elseif love.keyboard.isDown('.') and not love.keyboard.isDown('/') and Player1.jumping == true and Player1.canAttack then
         Player1:kick()
     end
     --jumping
@@ -92,15 +92,15 @@ function PlayState:update(dt)
     else
         Player2.blocking = false
     end
-    if love.keyboard.isDown('q') and love.keyboard.isDown('tab') and Player2.jumping == true then
+    if love.keyboard.isDown('q') and love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
         Player2:spunch()
-    elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') and Player2.jumping == true then
+    elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
         Player2:punch()
         
     end
-    if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true then
+    if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
         Player2:skick()
-    elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') and Player2.jumping == true then
+    elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
         Player2:kick()
     end
      if love.keyboard.isDown('w') and Player2.jumping == true then
