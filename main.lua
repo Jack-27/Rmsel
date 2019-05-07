@@ -1,21 +1,23 @@
 
-
-
 --Alright
-Push = require 'Push'
-Class = require 'Class'
+Push = require 'Utilities/Push'
+Class = require 'Utilities/Class'
 
 
 --Miscalleneous
-require 'Util'
-require 'Animation'
+require 'Gameplay/Projectile'
+require 'Gameplay/Projectiles'
+require 'Utilities/Util'
+require 'Utilities/Animation'
 require 'Settings'
-require 'StateMachine'
-require 'Hurtbox'
-require 'UI'
+require 'Utilities/StateMachine'
+require 'Gameplay/Hurtbox'
+require 'Gameplay/UI'
+
 --characters
-require 'ViolenceMan'
-require 'GeorgeLopez'
+require 'Characters/ViolenceMan'
+--require 'Characters/GeorgeLopez'
+require 'Characters/clippy'
 --states
 require 'states/BaseState'
 require 'states/TitleState'
@@ -25,13 +27,14 @@ require 'states/PlayState'
 
 function love.load() 
     love.window.setTitle('World Fighter')
+    cursor = love.mouse.newCursor("mouse3.png", 0, 0)
     --adds fonts and background
-    BigFont = love.graphics.newFont('PrStart.ttf', 64)
+    BigFont = love.graphics.newFont('Sprites/PrStart.ttf', 64)
     love.graphics.setFont(BigFont)
     love.graphics.setDefaultFilter('nearest', 'nearest')
-	local background = love.graphics.newImage('Sprites/Backgrounds/TempBackground.png')
 	love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
     --adds all the states to the state 
+    love.mouse.setCursor(cursor)
 	gStateMachine = StateMachine {
         ['title'] = function() return TitleState() end,
         ['play'] = function() return PlayState() end
@@ -52,13 +55,11 @@ function love.update(dt)
     --allows it to close
 	if love.keyboard.isDown('escape') then
 		love.event.quit()
-	end
-
+    end
 end
 
 function love.draw()
     --adds background, lets statemachine draw, and fixes the mem leak
-	love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/Background.png'), 0, 0)
 	gStateMachine:render()
     collectgarbage( 'collect' )
 end
