@@ -24,7 +24,11 @@ function GeorgeLopez:init(x, y, dir)
 	self.detectInput = true
 	self.jumping = true
 	self.jumpHeight = 20
+<<<<<<< HEAD:Characters/GeorgeLopez.lua
 
+=======
+	self.canAttack = true
+>>>>>>> master:Characters/GeorgeLopez.lua
 	self.Hurtboxx = self.x 
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64
@@ -170,7 +174,7 @@ function GeorgeLopez:render()
 	love.graphics.setColor(1, 1, 1)--]]
 	GLProjectile:render()
 	local anim = self.currentAnimation
-	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
+	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x + self.xoffset + self.offset, self.y + self.yoffset, 0, self.direction, 1)
 end
 
 function GeorgeLopez:punch()

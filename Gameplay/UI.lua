@@ -14,6 +14,15 @@ end
 function UI:update(dt)
 	self.time = self.time + dt
 
+
+
+	if self.time > 90 then
+		gStateMachine:change('win',{
+			P1HP = self.P1HP,
+			P2HP = self.P2HP
+		})
+	end
+
 end
 
 function UI:damage(player, damage)
@@ -22,6 +31,20 @@ function UI:damage(player, damage)
 	elseif player == 2 then
 		self.P2HP = self.P2HP - damage
 	end
+	if self.P1HP < 1 then 
+		gStateMachine:change('win',{
+			P1HP = self.P1HP,
+			P2HP = self.P2HP
+		})
+	end
+
+	if self.P2HP < 1 then 
+		gStateMachine:change('win',{
+			P1HP = self.P1HP,
+			P2HP = self.P2HP
+		})
+	end
+	
 end
 
 function UI:render()
@@ -33,4 +56,5 @@ function UI:render()
 	love.graphics.rectangle('fill', 16, 24, self.P2HP * 5 - 2, 42)
 	love.graphics.rectangle('fill', WINDOW_WIDTH - 516, 24, self.P1HP * 5 - 2, 42)
 	love.graphics.setColor(1, 1, 1)
+
 end
