@@ -2,7 +2,7 @@ PlayState = Class{__includes = BaseState}
 
 function PlayState:init() 
     Player2 = ViolenceMan(1200, 290, 1)
-	Player1 = GeorgeLopez(100, 290, 1)
+	Player1 = Ghost(100, 290, 1)
     paused = false
     UI = UI()
 end
@@ -119,7 +119,7 @@ function PlayState:update(dt)
                 Player1.Attack = nil
             end
         elseif Player1.Attack == 'spunch' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SPunch'], 1, 2)) then
-            if Player1.SKickHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+            if Player1.SPunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
                 UI:damage(2, tonumber(string.sub(Player1.AttackData['SPunch'], 3, 4)))
                 Player1.Attack = nil
             end

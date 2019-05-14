@@ -16,6 +16,7 @@ require 'UI'
 --characters
 require 'ViolenceMan'
 require 'GeorgeLopez'
+require 'Ghost'
 --states
 require 'states/BaseState'
 require 'states/TitleState'
