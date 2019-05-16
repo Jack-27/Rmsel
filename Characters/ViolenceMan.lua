@@ -175,7 +175,8 @@ function ViolenceMan:punch()
 		self.xoffset = -256
 		self.yoffset = -256
 		self.Attack = 'punch'
-	elseif self.attackFrame > 21 and self.attackFrame < 15 then
+
+	elseif self.attackFrame > 21 and self.attackFrame < 15 thena
 		self.canMove = false
 		
 	elseif self.attackFrame == 21 then

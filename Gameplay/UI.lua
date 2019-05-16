@@ -4,16 +4,17 @@ UI = Class{}
 function UI:init()
 	self.P1HP = 100
 	self.P2HP = 100
-	self.timeDisplay = 90 
+	self.timeDisplay = 90
 	self.round = 1
 	self.P1Wins = 0
 	self.P2Wins = 0
 	self.time = 0
-
 end
 
 function UI:update(dt)
 	self.time = self.time + dt
+
+
 
 	if self.time > 90 then
 		gStateMachine:change('win',{
@@ -21,6 +22,7 @@ function UI:update(dt)
 			P2HP = self.P2HP
 		})
 	end
+
 end
 
 function UI:damage(player, damage)
@@ -29,7 +31,6 @@ function UI:damage(player, damage)
 	elseif player == 2 then
 		self.P2HP = self.P2HP - damage
 	end
-
 	if self.P1HP < 1 then 
 		gStateMachine:change('win',{
 			P1HP = self.P1HP,
@@ -55,6 +56,5 @@ function UI:render()
 	love.graphics.rectangle('fill', 16, 24, self.P2HP * 5 - 2, 42)
 	love.graphics.rectangle('fill', WINDOW_WIDTH - 516, 24, self.P1HP * 5 - 2, 42)
 	love.graphics.setColor(1, 1, 1)
-
 
 end

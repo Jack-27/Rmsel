@@ -17,9 +17,11 @@ require 'Gameplay/UI'
 --characters
 
 require 'Characters/ViolenceMan'
+require 'Characters/GeorgeLopez'
+require 'Characters/clippy'
 require 'Characters/TonyTheTiger'
 require 'Characters/Ghost'
-require 'Characters/GeorgeLopez'
+
 --states
 require 'states/BaseState'
 require 'states/TitleState'
@@ -31,12 +33,15 @@ require 'states/Select2State'
 
 
 function love.load() 
+    love.window.setTitle('World Fighter')
+    cursor = love.mouse.newCursor("mouse3.png", 0, 0)
     --adds fonts and background
     BigFont = love.graphics.newFont('Sprites/PrStart.ttf', 64)
     love.graphics.setFont(BigFont)
     love.graphics.setDefaultFilter('nearest', 'nearest')
 	love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
     --adds all the states to the state 
+    love.mouse.setCursor(cursor)
 	gStateMachine = StateMachine {
         ['title'] = function() return TitleState() end,
         ['play'] = function() return PlayState() end,
@@ -60,8 +65,9 @@ function love.update(dt)
     --allows it to close
 	if love.keyboard.isDown('escape') then
 		love.event.quit()
-	end
+    end
 end
+
 function love.draw()
     --adds background, lets statemachine draw, and fixes the mem leak
 	gStateMachine:render()

@@ -24,7 +24,11 @@ function GeorgeLopez:init(x, y, dir)
 	self.detectInput = true
 	self.jumping = true
 	self.jumpHeight = 20
+<<<<<<< HEAD:Characters/GeorgeLopez.lua
+
+=======
 	self.canAttack = true
+>>>>>>> master:Characters/GeorgeLopez.lua
 	self.Hurtboxx = self.x 
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64

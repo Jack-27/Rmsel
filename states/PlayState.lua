@@ -1,24 +1,30 @@
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init() 
-
-   
-
-
+function PlayState:init() end
+  
 function PlayState:enter(parems)
-    
     Player1 = parems.selection1(100, 290, 1)    
     Player2 = parems.selection2(1200, 290, 1)
-
     paused = false
     UI = UI()
+    --consider using the pokemon sound effects as replacements for hits We should set up sound files somewhere else
+    opensound = love.audio.newSource("Sounds/opensound.wav","static")
+    --bgm = love.audio.newSource("Sounds/fightsound1.mp3","static")
+    bgm = love.audio.newSource("Sounds/backgroundmusic2.wav","static")
+    --[[p = love.audio.newSource("Sounds/psound.wav","static")
+    k = love.audio.newSource("Sounds/ksound.wav","static")
+    sp = love.audio.newSource("Sounds/spsound.wav","static")
+    sk = love.audio.newSource("Sounds/sksound.wav","static")--]]
+    bgm:setLooping(true)
+    opensound:play()
+    bgm:play()
 end
 
  end
 
-
-function PlayState:exit() end
-
+function PlayState:exit() 
+    bgm:stop()
+end
 
 function PlayState:update(dt) 
    UI:update(dt)
@@ -40,8 +46,7 @@ function PlayState:update(dt)
         Player1.dx = PLAYER_SPEED
         
     else
-        Player1.dx = 0
-        
+        Player1.dx = 0        
     end
     --crouching
     if love.keyboard.isDown('down') and Player1.jumping == true then
@@ -58,15 +63,20 @@ function PlayState:update(dt)
         Player1.blocking = false
     end
     --attacks allowing for the / to change into specials 
-    if love.keyboard.isDown(',') and love.keyboard.isDown('/') and Player1.jumping == true and Player1.canAttack then
+
+    if love.keyboard.isDown(',') and love.keyboard.isDown('/') and Player1.jumping == true then
         Player1:spunch()
-    elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') and Player1.jumping == true and Player1.canAttack then
+        --sp:play()
+    elseif love.keyboard.isDown(',') and not love.keyboard.isDown('/') and Player1.jumping == true then
         Player1:punch()
+        --p:play()
     end
-    if love.keyboard.isDown('.') and love.keyboard.isDown('/') and Player1.jumping == true  and Player1.canAttack then
+    if love.keyboard.isDown('.') and love.keyboard.isDown('/') and Player1.jumping == true then
         Player1:skick()
-    elseif love.keyboard.isDown('.') and not love.keyboard.isDown('/') and Player1.jumping == true and Player1.canAttack then
+        --sk:play()
+    elseif love.keyboard.isDown('.') and not love.keyboard.isDown('/') and Player1.jumping == true then
         Player1:kick()
+        --k:play()
     end
     --jumping
     if love.keyboard.isDown('up') and Player1.jumping == true then
@@ -98,16 +108,20 @@ function PlayState:update(dt)
     else
         Player2.blocking = false
     end
-    if love.keyboard.isDown('q') and love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
+
+    if love.keyboard.isDown('q') and love.keyboard.isDown('tab') and Player2.jumping == true then
         Player2:spunch()
-    elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
+        --sp:play()
+    elseif love.keyboard.isDown('q') and not love.keyboard.isDown('tab') and Player2.jumping == true then
         Player2:punch()
-        
+        --p:play()
     end
-    if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
+    if love.keyboard.isDown('e') and love.keyboard.isDown('tab') and Player2.jumping == true then
         Player2:skick()
-    elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') and Player2.jumping == true and Player2.canMove then
+        --sk:play()
+    elseif love.keyboard.isDown('e') and not love.keyboard.isDown('tab') and Player2.jumping == true then
         Player2:kick()
+        --k:play()
     end
      if love.keyboard.isDown('w') and Player2.jumping == true then
         Player2.dy = - Player2.jumpHeight
@@ -172,7 +186,10 @@ end
 
 function PlayState:render() 
     --drawing players
+
+    -- Lets Make a random selection love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/futurecity.png'), 0, 0)
     love.graphics.draw(love.graphics.newImage('Sprites/Backgrounds/Background.png'), 0, 0)
+
 	UI:render()
     Player1:render()
     love.graphics.setColor(1, 1, 1)

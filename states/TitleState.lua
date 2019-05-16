@@ -1,6 +1,10 @@
 TitleState = Class{__includes = BaseState}
 
-function TitleState:init() end
+function TitleState:init() 
+	sm = love.audio.newSource("Sounds/fightsound.wav","static")
+	sm:setLooping(true)
+    sm:play()
+end
 
 
 function TitleState:enter() end
@@ -11,7 +15,9 @@ function TitleState:exit() end
 
 function TitleState:update(dt)
 	if love.keyboard.isDown('return') then
+		sm:stop()
 		gStateMachine:change('select1')
+
 	end
 end
 
