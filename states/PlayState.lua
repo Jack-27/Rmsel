@@ -3,8 +3,8 @@ PlayState = Class{__includes = BaseState}
 function PlayState:init() end
   
 function PlayState:enter(parems)
-    Player1 = parems.selection1(100, 290, 1)    
-    Player2 = parems.selection2(1200, 290, 1)
+    Player1 = parems.selection1(1200, 290, 1)    
+    Player2 = parems.selection2(100, 290, 1)
     paused = false
     UI = UI()
     --consider using the pokemon sound effects as replacements for hits We should set up sound files somewhere else
@@ -20,7 +20,7 @@ function PlayState:enter(parems)
     bgm:play()
 end
 
- end
+
 
 function PlayState:exit() 
     bgm:stop()
