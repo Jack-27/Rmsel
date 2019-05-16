@@ -15,17 +15,20 @@ require 'Gameplay/Hurtbox'
 require 'Gameplay/UI'
 
 --characters
+
 require 'Characters/ViolenceMan'
 require 'Characters/GeorgeLopez'
 require 'Characters/clippy'
 require 'Characters/TonyTheTiger'
-
+require 'Characters/Ghost'
 
 --states
 require 'states/BaseState'
 require 'states/TitleState'
 require 'states/PlayState'
 require 'states/WinState'
+require 'states/Select1State'
+require 'states/Select2State'
 
 
 
@@ -42,7 +45,9 @@ function love.load()
 	gStateMachine = StateMachine {
         ['title'] = function() return TitleState() end,
         ['play'] = function() return PlayState() end,
-        ['win'] = function() return WinState() end
+        ['win'] = function() return WinState() end,
+        ['select1'] = function() return Select1State() end,
+        ['select2'] = function() return Select2State() end
     }
     gStateMachine:change('title')
     --honestly this is useless a relic of olden days

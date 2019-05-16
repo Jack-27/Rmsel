@@ -1,8 +1,10 @@
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init() 
-    Player1 = ViolenceMan(1200, 290, 1)
-	Player2 = clippy(100, 290, 1)
+function PlayState:init() end
+  
+function PlayState:enter(parems)
+    Player1 = parems.selection1(100, 290, 1)    
+    Player2 = parems.selection2(1200, 290, 1)
     paused = false
     UI = UI()
     --consider using the pokemon sound effects as replacements for hits We should set up sound files somewhere else
@@ -18,8 +20,7 @@ function PlayState:init()
     bgm:play()
 end
 
-
-function PlayState:enter() end
+ end
 
 function PlayState:exit() 
     bgm:stop()
@@ -62,7 +63,7 @@ function PlayState:update(dt)
         Player1.blocking = false
     end
     --attacks allowing for the / to change into specials 
-<<<<<<< HEAD
+
     if love.keyboard.isDown(',') and love.keyboard.isDown('/') and Player1.jumping == true then
         Player1:spunch()
         --sp:play()
@@ -107,7 +108,7 @@ function PlayState:update(dt)
     else
         Player2.blocking = false
     end
-<<<<<<< HEAD
+
     if love.keyboard.isDown('q') and love.keyboard.isDown('tab') and Player2.jumping == true then
         Player2:spunch()
         --sp:play()
@@ -143,7 +144,9 @@ function PlayState:update(dt)
                 Player1.Attack = nil
             end
         elseif Player1.Attack == 'spunch' and Player1.attackFrame > tonumber(string.sub(Player1.AttackData['SPunch'], 1, 2)) then
-            if Player1.SPunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) and Player2.blocking == false then
+
+            if Player1.SPunchHB:collide(Player2.Hurtbox.x, Player2.Hurtbox.width, Player2.Hurtbox.y, Player2.Hurtbox.height) then
+
                 UI:damage(2, tonumber(string.sub(Player1.AttackData['SPunch'], 3, 4)))
                 Player1.Attack = nil
             end
