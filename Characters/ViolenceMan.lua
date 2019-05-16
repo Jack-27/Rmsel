@@ -172,8 +172,8 @@ function ViolenceMan:punch()
 		self.detectInput = false
 		self.currentAnimation = VMPunchAnim
 		self.attacking = true
-		self.xoffset = 256
-		self.yoffset = 256
+		self.xoffset = -256
+		self.yoffset = -256
 		self.Attack = 'punch'
 	elseif self.attackFrame > 21 and self.attackFrame < 15 then
 		self.canMove = false

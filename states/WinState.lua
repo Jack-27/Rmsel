@@ -14,9 +14,7 @@ function WinState:enter(parems)
 function WinState:exit() end
 
 function WinState:update(dt)
- 	if love.keyboard.isDown('return') then
- 		gStateMachine:change('win')
- 	end
+ 	
  	if self.P1HP > self.P2HP then
 		self.winner = 'P1'
 	else
@@ -24,7 +22,7 @@ function WinState:update(dt)
 	end
 	
 	if love.keyboard.isDown('return') then
-		gStateMachine:change('title')
+		love.event.quit()
 	end
 end
 
