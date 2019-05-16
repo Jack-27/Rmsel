@@ -1,5 +1,5 @@
-require 'Animation'
-require 'Util'
+require 'Utilities/Animation'
+require 'Utilities/Util'
 
 VMgSprites = {
 	['idle'] = love.graphics.newImage('Sprites/ViolenceMan/violenceManIdle.png'),

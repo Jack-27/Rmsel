@@ -1,13 +1,13 @@
 ViolenceMan = Class{}
 
-require 'ViolenceManAnims'
+require 'Characters/ViolenceManAnims'
 function ViolenceMan:init(x, y, dir)
 	self.x = x
 	self.y = y
 	self.dx = 0
 	self.dy = 0
-	self.width = 64
-	self.height = 64
+	self.width = 256
+	self.height = 256
 	self.currentAnimation = VMIdleAnim
 	self.direction = dir
 	self.offset = 0
@@ -20,18 +20,36 @@ function ViolenceMan:init(x, y, dir)
 	self.crouchframe = 0
 	self.attacking = false
 	self.attackFrame = 0
-	self.detectInput = true
+	self.canAttack = true
 	self.jumping = true
 	self.jumpHeight = 18
+	self.Hurtboxx = self.x + 70
+	self.Hurtboxy = self.y + 20
+	self.HurtboxWidth = 75
+	self.HurtboxHeight = 232
+	self.Hurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
+	self.PunchHB = Hurtbox(self.x - 150, self.y + 120, 152, 20)
+	self.SKickHB = Hurtbox(self.x, self.y + 145, 32, 50)
+	self.SPunchHB = Hurtbox(self.x - 70, self.y + 82, 110, 20)
+	self.KickHB = VMProjectile.hurtbox
+	self.Attack = nil
+	self.AttackData = {
+		['Punch'] = '1111',
+		['Kick'] = '0005',
+		['SPunch'] = '0508',
+		['SKick'] = '1815'
+ 	}
+
 
 	
 end
 
 function ViolenceMan:update(dt)
 	local anim = self.currentAnimation
+	self.KickHB = VMProjectile.hurtbox
 
 	if self.direction == -1 then
-		self.offset = 256
+		self.offset = 210
 	else
 		self.offset = 0
 	end
@@ -44,8 +62,19 @@ function ViolenceMan:update(dt)
 	elseif self.dx == 0 then
 		if self.attacking == false and self.dx == 0 then
 	    	self.currentAnimation = VMIdleAnim
-	    	VMWalkAnim:refresh()
+			VMWalkAnim:refresh()
 	    end
+	end
+
+	self.Hurtbox:move(self.x + 70, self.y + 20)
+	if self.direction == 1 then 
+		self.PunchHB:move(self.x - 100, self.y + 80)
+		self.SKickHB:move(self.x, self.y + 155)
+		self.SPunchHB:move(self.x - 70, self.y + 95)
+	else
+		self.PunchHB:move(self.x + self.HurtboxWidth + 62, self.y + 80)
+		self.SKickHB:move(self.x + 170, self.y + 155)
+		self.SPunchHB:move(self.x + self.HurtboxWidth + 90, self.y + 95)
 	end
 	
 	if self.blocking == true and self.blockframe < 5 then
@@ -64,7 +93,7 @@ function ViolenceMan:update(dt)
 			self.canMove = true
 			VMBlockFROMAnim:refresh()
 			VMBlockTOAnim:refresh()
-			self.animCancel = truem
+			self.animCancel = true
 		end
 	end
 	if self.crouching == true and self.crouchframe < 4 then
@@ -109,15 +138,32 @@ function ViolenceMan:update(dt)
 		self.dy = 0
 		self.jumping = true
 	end
+	if self.direction == 1 then
+		self.dirx = self.x + 60
+	else
+		self.dirx = self.x + 140
+	end
+
 	self.currentAnimation:update(dt)
-end
+	VMProjectile:update(dt)
+end 
 
 
 
 
 function ViolenceMan:render()
+	--[[section to enable showing hit boxes
+	love.graphics.setColor(1, 0, 0)
+	self.PunchHB:render()
+	self.SPunchHB:render()	
+	self.SKickHB:render()
+	--VMSKickHB:render()
+	love.graphics.setColor(0, .05, .25)
+	self.Hurtbox:render()
+	love.graphics.setColor(1, 1, 1)--]]
+	VMProjectile:render()
 	local anim = self.currentAnimation
-	love.graphics.draw(VMgSprites[anim.texture], VMgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
+	love.graphics.draw(VMgSprites[anim.texture], VMgFrames[anim.texture][anim:getCurrentFrame()], self.x + self.xoffset + self.offset, self.y + self.yoffset, 0, self.direction, 1)
 end
 
 function ViolenceMan:punch()
@@ -126,10 +172,12 @@ function ViolenceMan:punch()
 		self.detectInput = false
 		self.currentAnimation = VMPunchAnim
 		self.attacking = true
-		self.xoffset = 256
-		self.yoffset = 256
-	elseif self.attackFrame > 21 then
+		self.xoffset = -256
+		self.yoffset = -256
+		self.Attack = 'punch'
+	elseif self.attackFrame > 21 and self.attackFrame < 15 then
 		self.canMove = false
+		
 	elseif self.attackFrame == 21 then
 		self.canMove = true
 		self.detectInput = true
@@ -137,6 +185,7 @@ function ViolenceMan:punch()
 		self.attacking = false
 		self.xoffset = 0
 		self.yoffset = 0
+		self.Attack = nil
 		VMPunchAnim:refresh()
 	end
 end
@@ -147,8 +196,10 @@ function ViolenceMan:kick()
 		self.detectInput = false
 		self.currentAnimation = VMKickAnim
 		self.attacking = true
+		self.Attack = 'kick'
 		--Cannonball =
-
+	elseif self.attackFrame == 8 then
+		VMProjectile:fire(self.dirx, self.y + 200, self.direction)
 	elseif self.attackFrame > 13 then
 		self.canMove = false
 	elseif self.attackFrame == 13 then
@@ -166,6 +217,7 @@ function ViolenceMan:skick()
 		self.detectInput = false
 		self.currentAnimation = VMSKickAnim
 		self.attacking = true
+		self.Attack = 'spunch'
 
 	elseif self.attackFrame > 22 then
 		self.canMove = false
@@ -174,6 +226,7 @@ function ViolenceMan:skick()
 		self.detectInput = true
 		self.currentAnimation = VMIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		VMSKickAnim:refresh()
 	end
 end
@@ -184,6 +237,7 @@ function ViolenceMan:spunch()
 		self.detectInput = false
 		self.currentAnimation = VMSPunchAnim
 		self.attacking = true
+		self.Attack = 'spunch'
 
 	elseif self.attackFrame > 7 then
 		self.canMove = false
@@ -192,6 +246,7 @@ function ViolenceMan:spunch()
 		self.detectInput = true
 		self.currentAnimation = VMIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		VMSPunchAnim:refresh()
 	end
 end

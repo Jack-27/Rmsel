@@ -1,6 +1,6 @@
 GeorgeLopez = Class{}
 
-require 'GeorgeLopezAnims'
+require 'Characters/GeorgeLopezAnims'
 function GeorgeLopez:init(x, y, dir)
 	--inits all the vars tried to make them self explainatory
 	self.x = x
@@ -24,14 +24,24 @@ function GeorgeLopez:init(x, y, dir)
 	self.detectInput = true
 	self.jumping = true
 	self.jumpHeight = 20
+	self.canAttack = true
 	self.Hurtboxx = self.x 
 	self.Hurtboxy = self.y 
 	self.HurtboxWidth = self.width - 64
 	self.HurtboxHeight = self.height - 50
-	GLHurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
-	GLPunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
-	GLKickHB = Hurtbox(self.x, self.y + 215, 32, 25)
-	GLSKickHB = Hurtbox(self.x, self.y + 32, 256, 64)
+	self.Hurtbox = Hurtbox(self.Hurtboxx, self.Hurtboxy, self.HurtboxWidth, self.HurtboxHeight)
+	self.PunchHB = Hurtbox(self.x, self.y + 120, 32, 20)
+	self.KickHB = Hurtbox(self.x, self.y + 215, 32, 25)
+	self.SKickHB = Hurtbox(self.x, self.y + 32, 256, 64)
+	self.SPunchHB = GLProjectile.hurtbox
+	-- remember sub.string and tonumber
+	self.Attack = nil
+	self.AttackData = {
+		['Punch'] = '0405',
+		['Kick'] = '0708',
+		['SPunch'] = '0010',
+		['SKick'] = '0509'
+ 	}
 
 
 
@@ -59,15 +69,15 @@ function GeorgeLopez:update(dt)
 	    end
 	end
 	--hitbox update
-	GLHurtbox:move(self.x + 32, self.y + 50)
+	self.Hurtbox:move(self.x + 32, self.y + 50)
 	if self.direction == 1 then 
-		GLPunchHB:move(self.x, self.y + 120)
-		GLKickHB:move(self.x, self.y + 215)
-		GLSKickHB:move(self.x, self.y + 32)
+		self.PunchHB:move(self.x, self.y + 120)
+		self.KickHB:move(self.x, self.y + 215)
+		self.SKickHB:move(self.x, self.y + 32)
 	else
-		GLPunchHB:move(self.x + self.HurtboxWidth + 32, self.y + 120)
-		GLKickHB:move(self.x + self.HurtboxWidth + 32, self.y + 215)
-		GLSKickHB:move(self.x, self.y + 32)
+		self.PunchHB:move(self.x + self.HurtboxWidth + 32, self.y + 120)
+		self.KickHB:move(self.x + self.HurtboxWidth + 32, self.y + 215)
+		self.SKickHB:move(self.x, self.y + 32)
 	end
 	--blocking code
 	if self.blocking == true and self.blockframe < 5 then
@@ -96,11 +106,11 @@ function GeorgeLopez:update(dt)
 		self.crouchframe = anim.currentFrame
 	elseif self.crouching == true and self.crouchframe == 4 then
 		self.currentAnimation = GLCrouchAnim
-		GLHurtbox:shifth(170, 36)
+		self.Hurtbox:shifth(170, 36)
 	elseif self.crouching == false and self.crouchframe > 0 then
 		self.currentAnimation = GLCrouchFROMAnim
 		local anim = self.currentAnimation
-		GLHurtbox:reset()
+		self.Hurtbox:reset()
 		self.crouchframe = (4 - anim.currentFrame)
 	else
 		if self.attacking == false and self.dx == 0 then
@@ -137,23 +147,30 @@ function GeorgeLopez:update(dt)
 		self.dy = 0
 		self.jumping = true
 	end
+	if self.direction == 1 then
+		self.dirx = self.x + 60
+	else
+		self.dirx = self.x + 180
+	end
+	GLProjectile:update(dt)
 end
 
 
 
 --rendering 
 function GeorgeLopez:render()
-	--section to enable showing hit boxes
-	--[[love.graphics.setColor(1, 0, 0)
-	GLPunchHB:render()
+	--[[section to enable showing hit boxes
+	love.graphics.setColor(1, 0, 0)
+	self.PunchHB:render()
 	--GLSPunchHB:render()
-	GLKickHB:render()
-	GLSKickHB:render()--]]
+	self.KickHB:render()
+	self.SKickHB:render()
 	love.graphics.setColor(0, .05, .25)
-	GLHurtbox:render()
+	self.Hurtbox:render()
 	love.graphics.setColor(1, 1, 1)--]]
+	GLProjectile:render()
 	local anim = self.currentAnimation
-	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x, self.y, 0, self.direction, 1, self.xoffset + self.offset, self.yoffset)
+	love.graphics.draw(GLgSprites[anim.texture], GLgFrames[anim.texture][anim:getCurrentFrame()], self.x + self.xoffset + self.offset, self.y + self.yoffset, 0, self.direction, 1)
 end
 
 function GeorgeLopez:punch()
@@ -162,6 +179,9 @@ function GeorgeLopez:punch()
 		self.canMove = false
 		self.detectInput = false
 		self.attacking = true
+		self.Attack = 'punch'
+	elseif self.attackFrame < 10 and self.attackFrame > 4 then
+		
 	elseif self.attackFrame > 14 then
 		self.canMove = false
 	elseif self.attackFrame == 14 then
@@ -169,6 +189,7 @@ function GeorgeLopez:punch()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		GLPunchAnim:refresh()
 	end
 end
@@ -179,6 +200,7 @@ function GeorgeLopez:kick()
 		self.detectInput = false
 		self.currentAnimation = GLKickAnim
 		self.attacking = true
+		self.Attack = 'kick'
 
 	elseif self.attackFrame > 15 then
 		self.canMove = false
@@ -187,6 +209,7 @@ function GeorgeLopez:kick()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		GLKickAnim:refresh()
 	end
 end
@@ -197,6 +220,8 @@ function GeorgeLopez:skick()
 		self.detectInput = false
 		self.currentAnimation = GLSKickAnim
 		self.attacking = true
+		self.Attack = 'skick'
+
 
 	elseif self.attackFrame > 13 then
 		self.canMove = false
@@ -205,6 +230,7 @@ function GeorgeLopez:skick()
 		self.detectInput = true
 		self.currentAnimation = GLIdleAnim
 		self.attacking = false
+		self.Attack = nil
 		GLSKickAnim:refresh()
 	end
 end
@@ -215,6 +241,9 @@ function GeorgeLopez:spunch()
 		self.detectInput = false
 		self.currentAnimation = GLSPunchAnim
 		self.attacking = true
+		self.Attack = 'spunch'
+	elseif self.attackFrame == 10 then
+		GLProjectile:fire(self.dirx, self.y + 110, self.direction)
 
 	elseif self.attackFrame > 12 then
 		self.canMove = false

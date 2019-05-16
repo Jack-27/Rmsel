@@ -39,13 +39,11 @@ end
 function Hurtbox:render()
 	love.graphics.rectangle('fill', self.x + self.widthMod, self.y + self.heightMod, self.width, self.height)
 end
---This 100% will not work, reworking later
-function Hurtbox:collide(hurtbox2)
-	if self.x + self.width + self.widthMod == hurtbox2.x then
-		return true
-	elseif self.x == hurtbox2.x + hurtbox2.width + hurtbox2.widthMod then
-		return true
-	else
-		return false
-	end
+
+function Hurtbox:collide(x, width, y, height)
+  return self.x < x+width and
+         x < self.x+self.width and
+         self.y < y+height and
+         y < self.y+self.height
 end
+
