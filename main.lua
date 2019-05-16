@@ -15,8 +15,10 @@ require 'Gameplay/Hurtbox'
 require 'Gameplay/UI'
 
 --characters
+
 require 'Characters/ViolenceMan'
 require 'Characters/TonyTheTiger'
+require 'Characters/Ghost'
 --states
 require 'states/BaseState'
 require 'states/TitleState'
